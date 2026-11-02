@@ -1,0 +1,8 @@
+
+> kaoruko-waguri@5.0.0 test:platform-ui
+> node scripts/teste-plataforma-ui.mjs
+
+[02/11/2026, 15:26:11] ok Banco SQLite pronto (:memory:)
+[02/11/2026, 15:26:11] ok [ REGISTRY ] 329 comandos + 98 aliases e submenus gerados automaticamente
+[02/11/2026, 15:26:11] ok Painel web em http://localhost:0
+PASSOU: plataforma e Mini App em Chromium; identidades, SDK e Telegram simulados; nenhuma cobranca nem chamada real ao Telegram.

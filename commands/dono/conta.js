@@ -13,6 +13,7 @@ export const description = 'Gerencia as contas de acesso ao painel web';
 export const aliases = ['contas', 'painelconta'];
 export const uso = '/conta criar email@x.com senha123';
 export const soDono = true;
+export const soPrivado = true;
 
 function ajuda(ctx) {
   return ctx.responderComApagar(

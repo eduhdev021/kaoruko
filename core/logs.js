@@ -23,7 +23,9 @@ export function registrarLog({
     Date.now(),
     nivel,
     String(comando).slice(0, 60),
-    String(argumento).slice(0, 300),
+    ["conta", "contas", "painelconta", "convite", "business", "telegram", "canal", "contato", "local"].includes(String(comando).toLowerCase())
+      ? "[argumentos privados omitidos]"
+      : String(argumento).slice(0, 300),
     String(userId),
     String(nome).slice(0, 80),
     String(chatId),

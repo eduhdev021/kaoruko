@@ -569,6 +569,21 @@ function ligarEventos(rota) {
           </div>
 
           <details class="bloco">
+            <summary>Protecoes e atividade · v3.2</summary>
+            <p>As protecoes exigem permissao de apagar mensagens; administradores sao isentos.</p>
+            <div class="form-linha">
+              <div class="campo"><label>Antiflood (0 desativa, ou 3–30)</label><input id="g-flood" type="number" min="0" max="30" value="${d.automacao.antiflood}"></div>
+              <div class="campo"><label>Janela em segundos (5–60)</label><input id="g-janela" type="number" min="5" max="60" value="${d.automacao.janela}"></div>
+            </div>
+            <p>Tipos bloqueados</p>
+            ${['stickers','fotos','videos','audios','documentos','encaminhadas'].map(tipo => `<label style="display:inline-block;margin:8px"><input type="checkbox" name="g-bloqueio" value="${tipo}" ${d.automacao.bloqueios.includes(tipo) ? 'checked' : ''}> ${tipo}</label>`).join('')}
+            <div class="campo"><label>Termos bloqueados (um por linha, ate 50)</label><textarea id="g-palavras" class="area" rows="4">${esc(d.automacao.palavras.join('\n'))}</textarea></div>
+            <p><label><input id="g-ranking" type="checkbox" ${d.automacao.ranking ? 'checked' : ''}> Ativar coleta de ranking (ID, nome e pontos; sem texto de mensagens)</label></p>
+            <button class="btn" data-salvar-automacao="${esc(id)}">Salvar protecoes</button>
+            <p id="g-resultado" role="status"></p>
+          </details>
+
+          <details class="bloco">
             <summary><i class="fa-solid fa-paper-plane"></i> Mandar mensagem</summary>
             <textarea id="m-texto" class="area" rows="3" placeholder="Escreva aqui..."></textarea>
             <div class="form-linha" style="margin-top:10px">
@@ -1532,6 +1547,26 @@ function ligarEventos(rota) {
     });
 
     modalUser.addEventListener("click", async (ev) => {
+      const salvarAutomacao = ev.target.closest('[data-salvar-automacao]');
+      if (salvarAutomacao) {
+        const resultado = document.getElementById('g-resultado');
+        salvarAutomacao.disabled = true;
+        try {
+          await api(`/api/admin/grupo/${encodeURIComponent(salvarAutomacao.dataset.salvarAutomacao)}/automacao`, {
+            method: 'PUT', body: JSON.stringify({
+              antiflood: Number(document.getElementById('g-flood').value),
+              janela: Number(document.getElementById('g-janela').value),
+              bloqueios: [...modalUser.querySelectorAll('[name="g-bloqueio"]:checked')].map(x => x.value),
+              palavras: document.getElementById('g-palavras').value.split('\n').map(x => x.trim()).filter(Boolean),
+              ranking: document.getElementById('g-ranking').checked,
+            }),
+          });
+          resultado.textContent = 'Configuracao salva.';
+        } catch (err) { resultado.textContent = err.message; }
+        finally { salvarAutomacao.disabled = false; }
+        return;
+      }
+
       if (ev.target === modalUser || ev.target.closest("#fechar-user")) {
         modalUser.classList.add("oculto");
         return;

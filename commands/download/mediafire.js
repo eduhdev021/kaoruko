@@ -38,10 +38,7 @@ export default async function cmdmediafire(ctx) {
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       if (/too big|failed to get http url content/i.test(msg)) {
-        await ctx.enviarDocumento(midia, {
-          caption: legenda,
-          reply_markup: ctx.tecladoApagar(),
-        });
+        await ctx.responderComApagar(`O arquivo excede o limite ou nao pode ser enviado. <a href="${escapeHtml(midia)}">Abrir o download no navegador</a>`);
         return;
       }
       throw err;

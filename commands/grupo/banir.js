@@ -1,3 +1,4 @@
+import { aplicarModeracao } from '../../core/moderacao.js';
 import botConfig from '../../config/index.js';
 import { escapeHtml } from '../../utils/helpers.js';
 export const description = 'Expulsa um membro do grupo';
@@ -25,7 +26,7 @@ export default async function banir(ctx) {
     return;
   }
   try {
-    await ctx.waguri.telegram.banChatMember(ctx.chatId, Number(alvo.id));
+    await aplicarModeracao(ctx.waguri.telegram,{chatId:ctx.chatId,userId:alvo.id,ator:ctx.userId,tipo:'banir',motivo:ctx.q});
     await ctx.responderComApagar(` <b>${escapeHtml(alvo.nome)}</b> foi removido do grupo.`);
   } catch {
     await ctx.erro(

@@ -93,6 +93,7 @@ export async function loadCommands() {
 
           const registrado = {
             name: commandName,
+            canonicalName: commandName,
             handler: mod.default,
             category,
             description: mod.description ?? '',

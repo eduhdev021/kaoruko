@@ -1,8 +1,12 @@
+> **Versão atual: 5.0.0 — Plataforma Telegram.** Comece pelo [GUIA-5.0.md](GUIA-5.0.md). [Matriz de cobertura](docs/TELEGRAM-COBERTURA.md): fluxos prontos vs. catálogo/cliente de 185 métodos. Mini App, Stars e Business ficam desligados até configurar.
+>
+> Validação local: **101 testes**, tipos e interfaces Chromium com Telegram/SDK simulados. **Nenhuma cobrança, conexão Business ou nova homologação real nesta versão.** O [relatório real parcial anterior](docs/HOMOLOGACAO-REAL-PARCIAL.md) corresponde à versão 4.0.
+
 # 🦊 Kaoruko Waguri
 
-Bot de Telegram em ESM puro (EcmaScript Modules), persistência em SQLite via `@boruto_vk7/better-sqlite3` e painel de controle web integrado via Express.
+Bot de Telegram em ESM puro (EcmaScript Modules), persistência em SQLite via `better-sqlite3` e painel de controle web integrado via Express.
 
-O bot conta com **278 comandos** divididos em categorias (diversão, downloads, logos, ia, etc.) e utiliza a **API Okarun System** para processamento de mídias, inteligência artificial e geração de imagens.
+O bot conta com **329 comandos registrados e 98 aliases** divididos em categorias (diversão, downloads, logos, ia, etc.) e utiliza a **API Okarun System** para processamento de mídias, inteligência artificial e geração de imagens.
 
 ---
 
@@ -16,7 +20,7 @@ O bot conta com **278 comandos** divididos em categorias (diversão, downloads, 
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/borutovk7/kaoruko.git
+   git clone https://github.com/eduhdev021/kaoruko.git
    cd kaoruko
    ```
 
@@ -206,3 +210,74 @@ O código fonte está licenciado sob os termos da licença **MIT** (veja o arqui
 <div align="center">
   <b>Eduardo Develop • Lagos Soluções</b>
 </div>
+
+## Revisao 3.0.1
+
+Veja `ATUALIZACOES.md` para correcoes, validacoes e limites desta revisao.
+Execute `npm test` para rodar os testes com banco em memoria (sem token Telegram).
+O cadastro publico sempre cria membros; configure `PAINEL_ADMIN_EMAIL` e
+`PAINEL_ADMIN_SENHA` no `.env` para provisionar o administrador.
+
+
+## Novidades 3.1 — Comunidade
+
+A versao 3.1 adiciona moderacao configuravel e utilidades sem depender da API OKARUN.
+Todos os comandos novos sao encontrados automaticamente no menu existente.
+
+| Comando | Funcao |
+| --- | --- |
+| `/novidades` | Resumo das novidades e exemplos |
+| `/buscarcmd musica` | Busca por nome, alias ou descricao |
+| `/lembrete 10m beber agua` | Agenda no chat atual, mesmo apos reiniciar |
+| `/lembrete listar` | Lista seus lembretes pendentes |
+| `/lembrete cancelar 1` | Cancela apenas um lembrete seu |
+| `/boasvindas Ola {nome}, bem-vindo ao {grupo}!` | Define boas-vindas (admin) |
+| `/boasvindas off` | Desativa boas-vindas (admin) |
+| `/regras` | Consulta regras |
+| `/regras definir Respeite os membros` | Altera regras (admin) |
+| `/regras limpar` | Remove regras (admin) |
+| `/antilink on` ou `/antilink off` | Controla remocao de links (admin) |
+| `/advertir` em resposta | Registra advertencia (admin) |
+| `/advertir ver` ou `/advertir limpar` em resposta | Consulta ou zera advertencias (admin) |
+| `/enquete Pergunta \| Sim \| Nao` | Enquete anonima nativa |
+| `/configgrupo` | Configuracoes e permissoes (admin) |
+| `/diagnostico` | Banco, memoria e tarefas pendentes (dono) |
+
+### Permissoes e funcionamento
+- Para o antilink, a bot precisa ser administradora com permissao de apagar mensagens.
+- O Telegram precisa entregar as mensagens comuns: mantenha a bot como administradora ou ajuste `/setprivacy` no BotFather. O modo de privacidade tambem pode afetar outros comandos no grupo.
+- Administradores e donos sao isentos do antilink. Links em legendas e entidades `text_link` tambem sao detectados. Nao e um filtro universal contra toda forma de URL ofuscada.
+- Advertencias sao registros informativos: **nao banem automaticamente**.
+- Boas-vindas aceitam `{nome}`, `{grupo}` e `{id}`. Texto e nomes sao escapados para evitar injecao de HTML.
+- Lembretes aceitam de 10 segundos a 30 dias, com ate 10 pendentes por usuario. Sao enviados no chat de criacao e podem ser vistos por todos nesse chat. Use o privado para lembretes pessoais.
+- A fila e consultada a cada 5 segundos, com ate 20 entregas por ciclo. Se a bot estiver desligada, entregara os vencidos quando voltar.
+- Falhas temporarias sao reagendadas com limite de tentativas. Bloqueio da bot, chat invalido ou esgotamento das tentativas descartam a entrega com registro no console.
+- Em caso raro de queda entre envio e confirmacao no banco, um lembrete pode ser repetido. Rode apenas uma instancia por banco para evitar concorrencia na fila.
+- Contas do painel agora sao gerenciadas apenas no privado. Novos logs ocultam os argumentos desses comandos; revise logs antigos caso tenham sido gravadas senhas anteriormente.
+
+### Docker (opcional)
+
+Foram adicionados `Dockerfile` e `compose.yaml`. O build Docker nao foi executado neste ambiente.
+
+```bash
+cp .env.example .env
+# Preencha suas credenciais e mantenha PAINEL_PORT=4091 no compose padrao.
+docker compose up -d --build
+docker compose logs -f
+```
+
+O banco fica em um volume persistente; o painel e exposto somente em `127.0.0.1:4091` no host.
+Use um proxy HTTPS para publicar o painel. Para migrar uma instalacao existente, copie seu banco para o volume antes de iniciar; o volume novo nao importa automaticamente a pasta database do host.
+
+
+## Central de Gestão 4.0
+
+CAPTCHA e anti-raid, antispam com domínios permitidos, política de advertências, histórico/reversão, notas com mídia e botões, comandos personalizados, publicações recorrentes, reputação/níveis, gráficos, acesso por grupo e backups automáticos.
+
+As proteções e coletas novas começam desligadas. O acesso de admins exige vínculo da conta pelo dono e confirmação do cargo no Telegram por requisição. Veja o guia antes de ativar punições.
+
+![Central em homologação — dados simulados](docs/central-desktop.png)
+
+`npm test`: suíte automatizada. `npm run test:ui`: smoke test opcional contra homologação, com variáveis e navegador conforme o guia. A restauração é feita com a bot parada: `npm run restaurar -- /caminho/backup.db`.
+
+As seções de versões 3.x acima são histórico. Em particular, notas agora suportam mídia e avisos agora podem ter punição configurável; consulte o guia 4.0 para o comportamento atual.

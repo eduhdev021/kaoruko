@@ -1,0 +1,2 @@
+export const description='Aplica uma reacao da bot a mensagem respondida';export const soGrupo=true;export const soAdmin=true;
+export default ctx=>{if(!ctx.respondida?.message_id||!ctx.q||ctx.q.length>20)return ctx.erro('Responda a mensagem e use /reagir 👍');return ctx.waguri.telegram.callApi('setMessageReaction',{chat_id:ctx.chatId,message_id:ctx.respondida.message_id,reaction:[{type:'emoji',emoji:ctx.q}],is_big:false});};

@@ -1,3 +1,4 @@
+import { obterConteudo,enviarConteudo } from './recursos.js';
 import botConfig from "../config/index.js";
 import { commandRegistry, getCommand } from "../commands/registry.js";
 import { registrarUsoComando } from "./storage.js";
@@ -29,13 +30,13 @@ export function sugerir(nome) {
   return melhorNota >= 0.5 ? melhor : null;
 }
 
-function checarCooldown(userId, cmd, plano) {
+export function checarCooldown(userId, cmd, plano) {
   if (botConfig.ehDono(userId)) return 0;
 
   const segundos = Math.max(cmd.cooldown ?? 0, plano.cooldown ?? 0);
   if (segundos <= 0) return 0;
 
-  const chave = `${userId}:${cmd.name}`;
+  const chave = `${userId}:${cmd.canonicalName ?? cmd.name}`;
   const agora = Date.now();
   const ultimo = cooldowns.get(chave) ?? 0;
   const restante = ultimo + segundos * 1000 - agora;
@@ -112,7 +113,11 @@ async function tratarErro(err, contexto, cmd) {
 }
 
 export async function despachar(contexto) {
-  const cmd = getCommand(contexto.comando);
+  let cmd = getCommand(contexto.comando);
+  if(!cmd&&contexto.isGroup){
+    const conteudo=obterConteudo(contexto.chatId,'comando',contexto.comando);
+    if(conteudo)cmd={name:contexto.comando,canonicalName:`custom:${contexto.chatId}:${contexto.comando}`,soGrupo:true,cooldown:5,handler:ctx=>enviarConteudo(ctx.waguri.telegram,ctx.chatId,conteudo)};
+  }
 
   if (!cmd) {
     const sugestao = sugerir(contexto.comando);

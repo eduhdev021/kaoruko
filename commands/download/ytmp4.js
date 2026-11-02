@@ -39,7 +39,7 @@ export default async function ytmp4(ctx) {
       await ctx.responderComApagar(
         `<b>Arquivo grande demais</b>\n\n` +
           `Esse tem ${tamanhoLegivel(r.tamanho)} e o Telegram so aceita 50MB.\n\n` +
-          `<a href="${arquivo}">Baixar direto pelo navegador</a>`,
+          `<a href="${escapeHtml(arquivo)}">Baixar direto pelo navegador</a>`,
       );
       return;
     }

@@ -5,3 +5,12 @@ node_modules/
 *.sqlite3
 *.log
 .DS_Store
+
+config.json
+database/
+*.db-wal
+*.db-shm
+
+backups/
+runtime.lock
+*.restaurando

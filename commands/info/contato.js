@@ -1,0 +1,2 @@
+export const description='Envia um cartao de contato informado explicitamente';
+export default ctx=>{const [telefone,nome]=ctx.q.split('|').map(s=>s.trim());if(!/^\+?[0-9 ()-]{5,25}$/.test(telefone||'')||!nome||nome.length>64)return ctx.erro('/contato TELEFONE | NOME. Compartilhe apenas dados que voce tem autorizacao para publicar.');return ctx.waguri.telegram.callApi('sendContact',{chat_id:ctx.chatId,phone_number:telefone,first_name:nome});};

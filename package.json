@@ -1,22 +1,25 @@
 {
   "name": "kaoruko-waguri",
-  "version": "3.0.0",
+  "version": "5.0.0",
   "description": "Kaoruko Waguri - Bot de Telegram em ESM com OKARUN API e SQLite",
   "type": "module",
   "main": "index.js",
   "engines": {
     "node": ">=20.0.0"
   },
-  "boruto": {
-    "sqliteVersion": "^12.9.0"
-  },
   "scripts": {
     "start": "node index.js",
-    "dev": "node --watch index.js"
+    "dev": "node --watch index.js",
+    "test": "node --test",
+    "restaurar": "node scripts/restaurar.js",
+    "test:ui": "node scripts/teste-interface.mjs",
+    "catalogo:telegram": "node scripts/catalogo-telegram.mjs",
+    "test:types": "tsc --noEmit --strict --skipLibCheck --target ES2022 --module NodeNext --moduleResolution NodeNext scripts/verificar-tipos-telegram.ts",
+    "test:platform-ui": "node scripts/teste-plataforma-ui.mjs"
   },
   "dependencies": {
-    "@boruto_vk7/better-sqlite3": "^1.0.14",
     "axios": "^1.7.9",
+    "better-sqlite3": "^12.11.1",
     "cfonts": "^3.3.0",
     "chalk": "^5.4.1",
     "dotenv": "^16.4.7",
@@ -35,8 +38,10 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/express": "^5.0.0",
+    "@grammyjs/types": "^5.0.0",
+    "@types/express": "^4.17.21",
     "@types/node": "^22.10.5",
+    "playwright": "^1.64.1",
     "typescript": "^5.7.3"
   }
 }

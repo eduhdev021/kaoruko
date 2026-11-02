@@ -1,3 +1,4 @@
+import { escapeHtml,urlHttpValida } from '../utils/helpers.js';
 import axios from "axios";
 import botConfig from "../config/index.js";
 export class OkarunError extends Error {
@@ -26,20 +27,23 @@ export class OkarunError extends Error {
       case "NOT_FOUND":
         return " Nao achei nada com isso. Confere o link ou tenta outro termo.";
       default:
-        return `${this.message}`;
+        return escapeHtml(this.message);
     }
   }
 }
 const http = axios.create({
   baseURL: botConfig.okarun.baseUrl,
   timeout: botConfig.okarun.timeout,
+  maxContentLength: 5 * 1024 * 1024,
+  maxBodyLength: 1024 * 1024,
   headers: {
-    "User-Agent": "KaorukoWaguri/3.0 (+telegram)",
+    "User-Agent": "KaorukoWaguri/5.0 (+telegram)",
     Accept: "application/json, */*",
   },
   validateStatus: () => true,
 });
 export async function requisitar(rota, params = {}, opcoes = {}) {
+  if(typeof rota!=='string'||!rota.startsWith('/api/')||rota.includes('://')||rota.includes('\\'))throw new OkarunError('Rota de API invalida',{code:'INVALID_ROUTE'});
   const apikey = botConfig.okarun.apikey;
   if (!apikey) {
     throw new OkarunError("API key nao configurada", {
@@ -152,7 +156,7 @@ const CHAVES_URL = [
 ];
 export function acharUrl(objeto, extras = []) {
   const achado = acharCampo(objeto, [...extras, ...CHAVES_URL]);
-  return typeof achado === "string" ? achado : undefined;
+  return typeof achado === "string" && urlHttpValida(achado) ? new URL(achado).href : undefined;
 }
 export function extrairResultado(envelope) {
   if (!ehObjeto(envelope)) return envelope;
@@ -328,7 +332,7 @@ function nomeDoHeader(disposicao) {
 }
 
 async function arquivoDireto(rota, params, esperado) {
-  if (!botConfig.okarun.apikey) {
+  if (!botConfig.okarun.apikey || /^(COLE_|SUA_)/.test(botConfig.okarun.apikey)) {
     throw new OkarunError("API key nao configurada", {
       code: "MISSING_APIKEY",
       rota,
@@ -717,8 +721,8 @@ export const logos = {
     return url;
   },
 };
-export async function verificarKey() {
-  if (!botConfig.okarun.apikey) {
+async function verificarKeyRemota() {
+  if (!botConfig.okarun.apikey || /^(COLE_|SUA_)/.test(botConfig.okarun.apikey)) {
     return { ok: false, motivo: "Nenhuma apikey configurada" };
   }
   try {
@@ -736,6 +740,17 @@ export async function verificarKey() {
       motivo: err instanceof Error ? err.message : String(err),
     };
   }
+}
+let statusKeyCache = null;
+let statusKeyPendente = null;
+export async function verificarKey() {
+  const identidade = `${botConfig.okarun.baseUrl}:${botConfig.okarun.apikey}`;
+  if(statusKeyCache?.identidade===identidade && statusKeyCache.ate>Date.now())return statusKeyCache.valor;
+  if(statusKeyPendente?.identidade===identidade)return statusKeyPendente.promessa;
+  const promessa=verificarKeyRemota().then(valor=>{
+    statusKeyCache={identidade,valor,ate:Date.now()+30000};return valor;
+  }).finally(()=>{if(statusKeyPendente?.promessa===promessa)statusKeyPendente=null;});
+  statusKeyPendente={identidade,promessa};return promessa;
 }
 export default {
   requisitar,

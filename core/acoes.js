@@ -1,3 +1,4 @@
+import { aplicarModeracao } from './moderacao.js';
 import { db } from "./db.js";
 import botConfig from "../config/index.js";
 import { registrarLog } from "./logs.js";
@@ -168,11 +169,7 @@ export async function removerDoGrupo({ grupoId, userId, banir }, quem) {
     throw new Error("Nao da pra remover um dono do bot");
 
   try {
-    await tg.banChatMember(Number(grupoId), Number(userId));
-    if (!banir)
-      await tg.unbanChatMember(Number(grupoId), Number(userId), {
-        only_if_banned: true,
-      });
+    await aplicarModeracao(tg,{chatId:Number(grupoId),userId,ator:quem?.email||quem?.id||'painel',tipo:banir?'banir':'expulsar',motivo:'Acao pelo painel administrativo'});
 
     log("removerMembro", { grupoId, userId, banir }, quem);
     return { ok: true };

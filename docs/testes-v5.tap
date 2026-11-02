@@ -1,0 +1,535 @@
+
+> kaoruko-waguri@5.0.0 test
+> node --test
+
+TAP version 13
+# [02/11/2026, 15:26:38] ok Banco SQLite pronto (:memory:)
+# Subtest: configuracoes novas desligadas por padrao
+ok 1 - configuracoes novas desligadas por padrao
+  ---
+  duration_ms: 1.193233
+  ...
+# Subtest: configuracoes persistem sem afetar outro grupo
+ok 2 - configuracoes persistem sem afetar outro grupo
+  ---
+  duration_ms: 0.231117
+  ...
+# Subtest: notas e filtros isolados por grupo e tipo
+ok 3 - notas e filtros isolados por grupo e tipo
+  ---
+  duration_ms: 0.432897
+  ...
+# Subtest: limites de notas e validacao de entradas
+ok 4 - limites de notas e validacao de entradas
+  ---
+  duration_ms: 3.092151
+  ...
+# Subtest: antiflood bloqueia so excedentes e expira janela
+ok 5 - antiflood bloqueia so excedentes e expira janela
+  ---
+  duration_ms: 0.254844
+  ...
+# Subtest: bloqueios de midia e palavras funcionam em legenda
+ok 6 - bloqueios de midia e palavras funcionam em legenda
+  ---
+  duration_ms: 0.288983
+  ...
+# Subtest: ranking limita pontos e isola grupos
+ok 7 - ranking limita pontos e isola grupos
+  ---
+  duration_ms: 0.339369
+  ...
+# Subtest: validacao de payload do painel
+ok 8 - validacao de payload do painel
+  ---
+  duration_ms: 0.257757
+  ...
+# Subtest: pipeline apaga conteudo bloqueado de membro mas nao de admin
+ok 9 - pipeline apaga conteudo bloqueado de membro mas nao de admin
+  ---
+  duration_ms: 0.70632
+  ...
+# Subtest: filtro exige igualdade, ignora comandos e limita respostas
+ok 10 - filtro exige igualdade, ignora comandos e limita respostas
+  ---
+  duration_ms: 0.537832
+  ...
+# Subtest: atividade nao e coletada enquanto ranking estiver desligado
+ok 11 - atividade nao e coletada enquanto ranking estiver desligado
+  ---
+  duration_ms: 0.337448
+  ...
+# [02/11/2026, 15:26:39] ok [ REGISTRY ] 329 comandos + 98 aliases e submenus gerados automaticamente
+# Subtest: registro carrega modulos novos com permissoes
+ok 12 - registro carrega modulos novos com permissoes
+  ---
+  duration_ms: 463.27957
+  ...
+# Subtest: notas nao permitem alteracao por membro comum
+ok 13 - notas nao permitem alteracao por membro comum
+  ---
+  duration_ms: 0.647964
+  ...
+# Subtest: silenciamento impede alvo admin e usa prazo temporario para membro
+ok 14 - silenciamento impede alvo admin e usa prazo temporario para membro
+  ---
+  duration_ms: 1.049821
+  ...
+# Subtest: dessilenciamento respeita permissoes padrao em vez de liberar tudo
+ok 15 - dessilenciamento respeita permissoes padrao em vez de liberar tudo
+  ---
+  duration_ms: 0.506607
+  ...
+# Subtest: edicoes sao moderadas mas nao geram pontos nem respostas de filtro
+ok 16 - edicoes sao moderadas mas nao geram pontos nem respostas de filtro
+  ---
+  duration_ms: 0.502071
+  ...
+# Subtest: alias e nome principal compartilham cooldown
+ok 17 - alias e nome principal compartilham cooldown
+  ---
+  duration_ms: 0.339988
+  ...
+# [02/11/2026, 15:26:39] ok Banco SQLite pronto (:memory:)
+# [02/11/2026, 15:26:39] !  Lembrete 13 descartado: bloqueado
+# Subtest: configuracoes de grupo sao persistidas e isoladas
+ok 18 - configuracoes de grupo sao persistidas e isoladas
+  ---
+  duration_ms: 1.29653
+  ...
+# Subtest: advertencias isoladas por grupo e usuario
+ok 19 - advertencias isoladas por grupo e usuario
+  ---
+  duration_ms: 0.286476
+  ...
+# Subtest: deteccao de URL em texto, legenda e entidade oculta
+ok 20 - deteccao de URL em texto, legenda e entidade oculta
+  ---
+  duration_ms: 0.331718
+  ...
+# Subtest: boas-vindas escapam HTML e substituem placeholders
+ok 21 - boas-vindas escapam HTML e substituem placeholders
+  ---
+  duration_ms: 0.25329
+  ...
+# Subtest: antilink remove mensagem de membro mas preserva admin
+ok 22 - antilink remove mensagem de membro mas preserva admin
+  ---
+  duration_ms: 1.270372
+  ...
+# Subtest: prazos de lembretes aceitam apenas intervalos seguros
+ok 23 - prazos de lembretes aceitam apenas intervalos seguros
+  ---
+  duration_ms: 0.341633
+  ...
+# Subtest: cancelamento so pelo criador e limite de pendencias
+ok 24 - cancelamento so pelo criador e limite de pendencias
+  ---
+  duration_ms: 0.960733
+  ...
+# Subtest: lembrete e entregue apenas quando vence e removido apos sucesso
+ok 25 - lembrete e entregue apenas quando vence e removido apos sucesso
+  ---
+  duration_ms: 0.449274
+  ...
+# Subtest: falha temporaria reagenda e bloqueio permanente descarta lembrete
+ok 26 - falha temporaria reagenda e bloqueio permanente descarta lembrete
+  ---
+  duration_ms: 1.010887
+  ...
+# Subtest: limite HTTP bloqueia excesso e libera apos janela
+ok 27 - limite HTTP bloqueia excesso e libera apos janela
+  ---
+  duration_ms: 0.678053
+  ...
+# Subtest: logs nao guardam senhas de comandos de conta
+ok 28 - logs nao guardam senhas de comandos de conta
+  ---
+  duration_ms: 0.268806
+  ...
+# [02/11/2026, 15:26:39] ok [ REGISTRY ] 329 comandos + 98 aliases e submenus gerados automaticamente
+# Subtest: registro dinamico carrega todos os novos comandos
+ok 29 - registro dinamico carrega todos os novos comandos
+  ---
+  duration_ms: 430.267538
+  ...
+# [02/11/2026, 15:26:39] ok Banco SQLite pronto (:memory:)
+# [02/11/2026, 15:26:39] !  Publicacao 2: bloqueado
+# Subtest: v4: automacoes destrutivas e coleta desativadas por padrao
+ok 30 - v4: automacoes destrutivas e coleta desativadas por padrao
+  ---
+  duration_ms: 1.050678
+  ...
+# Subtest: v4: configuracao valida dominios, tipos e limites
+ok 31 - v4: configuracao valida dominios, tipos e limites
+  ---
+  duration_ms: 0.924749
+  ...
+# Subtest: v4: raid e detectado por grupo e expira sem alterar permissoes globais
+ok 32 - v4: raid e detectado por grupo e expira sem alterar permissoes globais
+  ---
+  duration_ms: 0.599895
+  ...
+# Subtest: v4: CAPTCHA restringe com prazo finito e somente o alvo pode responder
+ok 33 - v4: CAPTCHA restringe com prazo finito e somente o alvo pode responder
+  ---
+  duration_ms: 1.41724
+  ...
+# Subtest: v4: CAPTCHA correto restaura permissoes e remove pendencia
+ok 34 - v4: CAPTCHA correto restaura permissoes e remove pendencia
+  ---
+  duration_ms: 0.52918
+  ...
+# Subtest: v4: CAPTCHA impede quarta tentativa e e liberado ao expirar por padrao
+ok 35 - v4: CAPTCHA impede quarta tentativa e e liberado ao expirar por padrao
+  ---
+  duration_ms: 0.942082
+  ...
+# Subtest: v4: expulsao por timeout exige politica explicita
+ok 36 - v4: expulsao por timeout exige politica explicita
+  ---
+  duration_ms: 0.598362
+  ...
+# Subtest: v4: falha no envio do CAPTCHA tenta restaurar membro
+ok 37 - v4: falha no envio do CAPTCHA tenta restaurar membro
+  ---
+  duration_ms: 2.465493
+  ...
+# Subtest: v4: links ofuscados, dominios e fronteiras de subdominio
+ok 38 - v4: links ofuscados, dominios e fronteiras de subdominio
+  ---
+  duration_ms: 0.956976
+  ...
+# Subtest: v4: repeticoes possuem limite minimo e isolamento
+ok 39 - v4: repeticoes possuem limite minimo e isolamento
+  ---
+  duration_ms: 0.56344
+  ...
+# Subtest: v4: moderacao protege administradores e nao registra sucesso falso
+ok 40 - v4: moderacao protege administradores e nao registra sucesso falso
+  ---
+  duration_ms: 0.707063
+  ...
+# Subtest: v4: silenciamento gera historico reversivel e nao desfaz duas vezes
+ok 41 - v4: silenciamento gera historico reversivel e nao desfaz duas vezes
+  ---
+  duration_ms: 1.231559
+  ...
+# Subtest: v4: desfazer recusa acao posterior sobre o mesmo alvo
+ok 42 - v4: desfazer recusa acao posterior sobre o mesmo alvo
+  ---
+  duration_ms: 0.912029
+  ...
+# Subtest: v4: advertencia so pune ao atingir limite explicitamente configurado
+ok 43 - v4: advertencia so pune ao atingir limite explicitamente configurado
+  ---
+  duration_ms: 1.238792
+  ...
+# Subtest: v4: notas ricas validam botoes e rejeitam URLs como arquivo
+ok 44 - v4: notas ricas validam botoes e rejeitam URLs como arquivo
+  ---
+  duration_ms: 0.821959
+  ...
+# Subtest: v4: envio de nota usa file_id Telegram sem baixar arquivo remoto
+ok 45 - v4: envio de nota usa file_id Telegram sem baixar arquivo remoto
+  ---
+  duration_ms: 0.362499
+  ...
+# Subtest: v4: agendamento recorrente persiste e cancelamento e por grupo
+ok 46 - v4: agendamento recorrente persiste e cancelamento e por grupo
+  ---
+  duration_ms: 0.601252
+  ...
+# Subtest: v4: publicacao com erro permanente nao desaparece sem diagnostico
+ok 47 - v4: publicacao com erro permanente nao desaparece sem diagnostico
+  ---
+  duration_ms: 0.858261
+  ...
+# Subtest: v4: reputacao rejeita voto proprio, bots e mais de um voto em 24h
+ok 48 - v4: reputacao rejeita voto proprio, bots e mais de um voto em 24h
+  ---
+  duration_ms: 1.019342
+  ...
+# Subtest: v4: escopo do painel exige identidade vinculada e admin atual
+ok 49 - v4: escopo do painel exige identidade vinculada e admin atual
+  ---
+  duration_ms: 0.3796
+  ...
+# Subtest: v4: fila Telegram respeita 429 e nao intercepta polling
+ok 50 - v4: fila Telegram respeita 429 e nao intercepta polling
+  ---
+  duration_ms: 0.577089
+  ...
+# Subtest: v4: backup e consistente, privado e restauravel pelo CLI
+ok 51 - v4: backup e consistente, privado e restauravel pelo CLI
+  ---
+  duration_ms: 141.75896
+  ...
+# Subtest: v4: restauracao e recusada quando runtime.lock aponta processo vivo
+ok 52 - v4: restauracao e recusada quando runtime.lock aponta processo vivo
+  ---
+  duration_ms: 45.915429
+  ...
+# [02/11/2026, 15:26:40] ok Painel web em http://localhost:0
+# [02/11/2026, 15:26:40] !  CAPTCHA pendente 77: rede
+# [02/11/2026, 15:26:40] !  [console] bloqueado por teste@example.com: versao; cat .env
+# Subtest: v4: HTTP valida escopo, origem e importacao atomica
+ok 53 - v4: HTTP valida escopo, origem e importacao atomica
+  ---
+  duration_ms: 274.444353
+  ...
+# Subtest: v4: timeout completa desbanimento mesmo se a primeira tentativa falhar
+ok 54 - v4: timeout completa desbanimento mesmo se a primeira tentativa falhar
+  ---
+  duration_ms: 1.688365
+  ...
+# Subtest: v4: revisao dos downloads rejeita dominio falso e protocolos perigosos
+ok 55 - v4: revisao dos downloads rejeita dominio falso e protocolos perigosos
+  ---
+  duration_ms: 1.041108
+  ...
+# Subtest: v4: console web nao aceita shell arbitrario ou encadeamentos
+ok 56 - v4: console web nao aceita shell arbitrario ou encadeamentos
+  ---
+  duration_ms: 0.847637
+  ...
+# [02/11/2026, 15:26:40] !  Publicacao 3: 429
+# Subtest: v4: backups concorrentes compartilham a operacao sem duplicar arquivos
+ok 57 - v4: backups concorrentes compartilham a operacao sem duplicar arquivos
+  ---
+  duration_ms: 8.776873
+  ...
+# Subtest: v4: publicacoes reagendam retry_after sem loop imediato
+ok 58 - v4: publicacoes reagendam retry_after sem loop imediato
+  ---
+  duration_ms: 1.4959
+  ...
+# Subtest: v4: analytics exposto por grupo e exclusao respeita escopo
+ok 59 - v4: analytics exposto por grupo e exclusao respeita escopo
+  ---
+  duration_ms: 205.207676
+  ...
+# [02/11/2026, 15:26:40] ok Banco SQLite pronto (:memory:)
+# Subtest: v5: modulos comerciais e Mini App ficam desativados por padrao
+ok 60 - v5: modulos comerciais e Mini App ficam desativados por padrao
+  ---
+  duration_ms: 1.086816
+  ...
+# Subtest: v5: Mini App valida assinatura HMAC e identidade
+ok 61 - v5: Mini App valida assinatura HMAC e identidade
+  ---
+  duration_ms: 2.665976
+  ...
+# Subtest: v5: Mini App rejeita dados expirados, futuros e chaves duplicadas
+ok 62 - v5: Mini App rejeita dados expirados, futuros e chaves duplicadas
+  ---
+  duration_ms: 0.643154
+  ...
+# Subtest: v5: sessao Mini guarda so hash, expira e pode ser revogada
+ok 63 - v5: sessao Mini guarda so hash, expira e pode ser revogada
+  ---
+  duration_ms: 0.895075
+  ...
+# Subtest: v5: produto rejeita valores negativos e plano arbitrario
+ok 64 - v5: produto rejeita valores negativos e plano arbitrario
+  ---
+  duration_ms: 0.474026
+  ...
+# Subtest: v5: Stars desativado nao cria cobranca
+ok 65 - v5: Stars desativado nao cria cobranca
+  ---
+  duration_ms: 1.82806
+  ...
+# Subtest: v5: fatura usa XTR e snapshot do preco definido no servidor
+ok 66 - v5: fatura usa XTR e snapshot do preco definido no servidor
+  ---
+  duration_ms: 1.085101
+  ...
+# Subtest: v5: precheckout rejeita usuario, moeda e valor falsificados
+ok 67 - v5: precheckout rejeita usuario, moeda e valor falsificados
+  ---
+  duration_ms: 0.491254
+  ...
+# Subtest: v5: pagamento duplicado nao concede VIP duas vezes
+ok 68 - v5: pagamento duplicado nao concede VIP duas vezes
+  ---
+  duration_ms: 1.088406
+  ...
+# Subtest: v5: charge nao pode liquidar duas faturas
+ok 69 - v5: charge nao pode liquidar duas faturas
+  ---
+  duration_ms: 0.674086
+  ...
+# Subtest: v5: sucesso real e honrado mesmo apos desativar novas vendas
+ok 70 - v5: sucesso real e honrado mesmo apos desativar novas vendas
+  ---
+  duration_ms: 0.801385
+  ...
+# Subtest: v5: reembolso sem alteracao posterior restaura beneficio anterior
+ok 71 - v5: reembolso sem alteracao posterior restaura beneficio anterior
+  ---
+  duration_ms: 0.705645
+  ...
+# Subtest: v5: reembolso nao revoga outra concessao posterior
+ok 72 - v5: reembolso nao revoga outra concessao posterior
+  ---
+  duration_ms: 0.521599
+  ...
+# Subtest: v5: falha incerta de reembolso impede repeticao automatica e exige revisao
+ok 73 - v5: falha incerta de reembolso impede repeticao automatica e exige revisao
+  ---
+  duration_ms: 1.177798
+  ...
+# Subtest: v5: Business recebe conexao mas nao responde sem ativacao explicita
+ok 74 - v5: Business recebe conexao mas nao responde sem ativacao explicita
+  ---
+  duration_ms: 0.871024
+  ...
+# Subtest: v5: Business ignora mensagem do dono, bots e conexao revogada
+ok 75 - v5: Business ignora mensagem do dono, bots e conexao revogada
+  ---
+  duration_ms: 0.737335
+  ...
+# Subtest: v5: canal so publica apos confirmacao do ator e revalida admin
+ok 76 - v5: canal so publica apos confirmacao do ator e revalida admin
+  ---
+  duration_ms: 1.03988
+  ...
+# Subtest: v5: confirmacao expirada e falha de privilegio nao publicam
+ok 77 - v5: confirmacao expirada e falha de privilegio nao publicam
+  ---
+  duration_ms: 0.520866
+  ...
+# Subtest: v5: convite e topico requerem admin remoto atual
+ok 78 - v5: convite e topico requerem admin remoto atual
+  ---
+  duration_ms: 0.676148
+  ...
+# Subtest: v5: pedido de entrada permanece manual e decisao usa API adequada
+ok 79 - v5: pedido de entrada permanece manual e decisao usa API adequada
+  ---
+  duration_ms: 0.569109
+  ...
+# Subtest: v5: album e temporario e isolado pelo remetente
+ok 80 - v5: album e temporario e isolado pelo remetente
+  ---
+  duration_ms: 0.282018
+  ...
+# Subtest: v5: webhook valida segredo e rejeita encoding malicioso sem excecao
+ok 81 - v5: webhook valida segredo e rejeita encoding malicioso sem excecao
+  ---
+  duration_ms: 0.136908
+  ...
+# Subtest: v5: webhook deduplica updates e permite retentativa apos falha
+ok 82 - v5: webhook deduplica updates e permite retentativa apos falha
+  ---
+  duration_ms: 0.890322
+  ...
+# Subtest: v5: webhook indica processamento concorrente em vez de repetir acao
+ok 83 - v5: webhook indica processamento concorrente em vez de repetir acao
+  ---
+  duration_ms: 0.254559
+  ...
+# [02/11/2026, 15:26:41] ok [ REGISTRY ] 329 comandos + 98 aliases e submenus gerados automaticamente
+# Subtest: v5: modo inline so expoe comandos publicos quando ativado
+ok 84 - v5: modo inline so expoe comandos publicos quando ativado
+  ---
+  duration_ms: 422.643133
+  ...
+# Subtest: v5: middleware nao executa comandos comerciais nem confia em web_app_data
+ok 85 - v5: middleware nao executa comandos comerciais nem confia em web_app_data
+  ---
+  duration_ms: 0.516497
+  ...
+# [02/11/2026, 15:26:41] ok Painel web em http://localhost:0
+# Subtest: v5: Mini API valida assinatura, isola sessao e exige dono para produtos
+ok 86 - v5: Mini API valida assinatura, isola sessao e exige dono para produtos
+  ---
+  duration_ms: 208.674353
+  ...
+# Subtest: v5: novos comandos estao registrados com restricoes
+ok 87 - v5: novos comandos estao registrados com restricoes
+  ---
+  duration_ms: 0.341609
+  ...
+# Subtest: v5: cliente interno cobre o catalogo sem aceitar metodos arbitrarios
+ok 88 - v5: cliente interno cobre o catalogo sem aceitar metodos arbitrarios
+  ---
+  duration_ms: 2.432576
+  ...
+# Subtest: v5: compras nao rebaixam plano superior nem cobram VIP vitalicio
+ok 89 - v5: compras nao rebaixam plano superior nem cobram VIP vitalicio
+  ---
+  duration_ms: 1.227128
+  ...
+# Subtest: v5: falha ao criar invoice nao deixa compra pendente ativa
+ok 90 - v5: falha ao criar invoice nao deixa compra pendente ativa
+  ---
+  duration_ms: 0.470525
+  ...
+# Subtest: v5: fatura expirada e recusada antes de cobrar
+ok 91 - v5: fatura expirada e recusada antes de cobrar
+  ---
+  duration_ms: 0.404142
+  ...
+# Subtest: v5: sessao mini de outro usuario nao cancela lembrete alheio
+ok 92 - v5: sessao mini de outro usuario nao cancela lembrete alheio
+  ---
+  duration_ms: 3.577481
+  ...
+# Subtest: v5: registro de webhook exige configuracao valida e nao descarta updates
+ok 93 - v5: registro de webhook exige configuracao valida e nao descarta updates
+  ---
+  duration_ms: 0.29256
+  ...
+# Subtest: v5: restore invalida sessoes e drafts sem apagar registros financeiros
+ok 94 - v5: restore invalida sessoes e drafts sem apagar registros financeiros
+  ---
+  duration_ms: 56.052329
+  ...
+# [02/11/2026, 15:26:41] ok Banco SQLite pronto (:memory:)
+# [02/11/2026, 15:26:41] ok Painel web em http://localhost:0
+# Subtest: primeira conta nao recebe privilegios automaticamente
+ok 95 - primeira conta nao recebe privilegios automaticamente
+  ---
+  duration_ms: 69.084837
+  ...
+# Subtest: rejeita papeis desconhecidos
+ok 96 - rejeita papeis desconhecidos
+  ---
+  duration_ms: 69.604238
+  ...
+# Subtest: entradas de senha invalidas nao causam excecao
+ok 97 - entradas de senha invalidas nao causam excecao
+  ---
+  duration_ms: 0.719693
+  ...
+# Subtest: cookie malformado nao causa excecao
+ok 98 - cookie malformado nao causa excecao
+  ---
+  duration_ms: 0.199652
+  ...
+# Subtest: login, sessao e revogacao ao trocar senha
+ok 99 - login, sessao e revogacao ao trocar senha
+  ---
+  duration_ms: 277.112302
+  ...
+# Subtest: painel: registro sem privilegios, JSON invalido e acesso administrativo
+ok 100 - painel: registro sem privilegios, JSON invalido e acesso administrativo
+  ---
+  duration_ms: 201.803362
+  ...
+# Subtest: painel: somente dono pode salvar protecoes e payload e validado
+ok 101 - painel: somente dono pode salvar protecoes e payload e validado
+  ---
+  duration_ms: 229.447289
+  ...
+1..101
+# tests 101
+# suites 0
+# pass 101
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3836.208718

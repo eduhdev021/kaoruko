@@ -1,0 +1,2520 @@
+{
+  "fonte": "@grammyjs/types",
+  "versao": "5.0.0",
+  "metodos": [
+    {
+      "nome": "addStickerToSet",
+      "referencia": "https://core.telegram.org/bots/api#addstickertoset",
+      "descricao": "Use this method to add a new sticker to a set created by the bot. Emoji sticker sets can have up to 200 stickers. Other sticker sets can have up to 120 stickers. Returns True on success.",
+      "obrigatorios": [
+        "user_id",
+        "name",
+        "sticker"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "answerCallbackQuery",
+      "referencia": "https://core.telegram.org/bots/api#answercallbackquery",
+      "descricao": "Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned.",
+      "obrigatorios": [
+        "callback_query_id"
+      ],
+      "opcionais": [
+        "text",
+        "show_alert",
+        "url",
+        "cache_time"
+      ]
+    },
+    {
+      "nome": "answerChatJoinRequestQuery",
+      "referencia": "https://core.telegram.org/bots/api#answerchatjoinrequestquery",
+      "descricao": "Use this method to process a received chat join request query. Returns True on success.",
+      "obrigatorios": [
+        "chat_join_request_query_id",
+        "result"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "answerGuestQuery",
+      "referencia": "https://core.telegram.org/bots/api#answerguestquery",
+      "descricao": "Use this method to reply to a received guest message. On success, a SentGuestMessage object is returned.",
+      "obrigatorios": [
+        "guest_query_id",
+        "result"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "answerInlineQuery",
+      "referencia": "https://core.telegram.org/bots/api#answerinlinequery",
+      "descricao": "Use this method to send answers to an inline query. On success, True is returned.",
+      "obrigatorios": [
+        "inline_query_id",
+        "results"
+      ],
+      "opcionais": [
+        "cache_time",
+        "is_personal",
+        "next_offset",
+        "button"
+      ]
+    },
+    {
+      "nome": "answerPreCheckoutQuery",
+      "referencia": "https://core.telegram.org/bots/api#answerprecheckoutquery",
+      "descricao": "Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre_checkout_query. Use this method to respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.",
+      "obrigatorios": [
+        "pre_checkout_query_id",
+        "ok"
+      ],
+      "opcionais": [
+        "error_message"
+      ]
+    },
+    {
+      "nome": "answerShippingQuery",
+      "referencia": "https://core.telegram.org/bots/api#answershippingquery",
+      "descricao": "If you sent an invoice requesting a shipping address and the parameter is_flexible was specified, the Bot API will send an Update with a shipping_query field to the bot. Use this method to reply to shipping queries. On success, True is returned.",
+      "obrigatorios": [
+        "shipping_query_id",
+        "ok"
+      ],
+      "opcionais": [
+        "shipping_options",
+        "error_message"
+      ]
+    },
+    {
+      "nome": "answerWebAppQuery",
+      "referencia": "https://core.telegram.org/bots/api#answerwebappquery",
+      "descricao": "Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned.",
+      "obrigatorios": [
+        "web_app_query_id",
+        "result"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "approveChatJoinRequest",
+      "referencia": "https://core.telegram.org/bots/api#approvechatjoinrequest",
+      "descricao": "Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "user_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "approveSuggestedPost",
+      "referencia": "https://core.telegram.org/bots/api#approvesuggestedpost",
+      "descricao": "Use this method to approve a suggested post in a direct messages chat. The bot must have the 'can_post_messages' administrator right in the corresponding channel chat. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_id"
+      ],
+      "opcionais": [
+        "send_date"
+      ]
+    },
+    {
+      "nome": "banChatMember",
+      "referencia": "https://core.telegram.org/bots/api#banchatmember",
+      "descricao": "Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "user_id"
+      ],
+      "opcionais": [
+        "until_date",
+        "revoke_messages"
+      ]
+    },
+    {
+      "nome": "banChatSenderChat",
+      "referencia": "https://core.telegram.org/bots/api#banchatsenderchat",
+      "descricao": "Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won't be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "sender_chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "close",
+      "referencia": "https://core.telegram.org/bots/api#close",
+      "descricao": "Use this method to close the bot instance before moving it from one local server to another. You need to delete the webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters.",
+      "obrigatorios": [],
+      "opcionais": []
+    },
+    {
+      "nome": "closeForumTopic",
+      "referencia": "https://core.telegram.org/bots/api#closeforumtopic",
+      "descricao": "Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_thread_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "closeGeneralForumTopic",
+      "referencia": "https://core.telegram.org/bots/api#closegeneralforumtopic",
+      "descricao": "Use this method to close an open 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "convertGiftToStars",
+      "referencia": "https://core.telegram.org/bots/api#convertgifttostars",
+      "descricao": "Converts a given regular gift to Telegram Stars. Requires the can_convert_gifts_to_stars business bot right. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "owned_gift_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "copyMessage",
+      "referencia": "https://core.telegram.org/bots/api#copymessage",
+      "descricao": "Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.",
+      "obrigatorios": [
+        "chat_id",
+        "from_chat_id",
+        "message_id"
+      ],
+      "opcionais": [
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "video_start_timestamp",
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "show_caption_above_media",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "message_effect_id",
+        "suggested_post_parameters",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "copyMessages",
+      "referencia": "https://core.telegram.org/bots/api#copymessages",
+      "descricao": "Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "from_chat_id",
+        "message_ids"
+      ],
+      "opcionais": [
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "disable_notification",
+        "protect_content",
+        "remove_caption"
+      ]
+    },
+    {
+      "nome": "createChatInviteLink",
+      "referencia": "https://core.telegram.org/bots/api#createchatinvitelink",
+      "descricao": "Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": [
+        "name",
+        "expire_date",
+        "member_limit",
+        "creates_join_request"
+      ]
+    },
+    {
+      "nome": "createChatSubscriptionInviteLink",
+      "referencia": "https://core.telegram.org/bots/api#createchatsubscriptioninvitelink",
+      "descricao": "Use this method to create a subscription invite link for a channel chat. The bot must have the can_invite_users administrator rights. The link can be edited using the method editChatSubscriptionInviteLink or revoked using the method revokeChatInviteLink. Returns the new invite link as a ChatInviteLink object.",
+      "obrigatorios": [
+        "chat_id",
+        "subscription_period",
+        "subscription_price"
+      ],
+      "opcionais": [
+        "name"
+      ]
+    },
+    {
+      "nome": "createForumTopic",
+      "referencia": "https://core.telegram.org/bots/api#createforumtopic",
+      "descricao": "Use this method to create a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator right. Returns information about the created topic as a ForumTopic object.",
+      "obrigatorios": [
+        "chat_id",
+        "name"
+      ],
+      "opcionais": [
+        "icon_color",
+        "icon_custom_emoji_id"
+      ]
+    },
+    {
+      "nome": "createInvoiceLink",
+      "referencia": "https://core.telegram.org/bots/api#createinvoicelink",
+      "descricao": "Use this method to create a link for an invoice. Returns the created invoice link as String on success.",
+      "obrigatorios": [
+        "title",
+        "description",
+        "payload",
+        "currency",
+        "prices"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "provider_token",
+        "subscription_period",
+        "max_tip_amount",
+        "suggested_tip_amounts",
+        "provider_data",
+        "photo_url",
+        "photo_size",
+        "photo_width",
+        "photo_height",
+        "need_name",
+        "need_phone_number",
+        "need_email",
+        "need_shipping_address",
+        "send_phone_number_to_provider",
+        "send_email_to_provider",
+        "is_flexible"
+      ]
+    },
+    {
+      "nome": "createNewStickerSet",
+      "referencia": "https://core.telegram.org/bots/api#createnewstickerset",
+      "descricao": "Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. Returns True on success.",
+      "obrigatorios": [
+        "user_id",
+        "name",
+        "title",
+        "stickers"
+      ],
+      "opcionais": [
+        "sticker_type",
+        "needs_repainting"
+      ]
+    },
+    {
+      "nome": "declineChatJoinRequest",
+      "referencia": "https://core.telegram.org/bots/api#declinechatjoinrequest",
+      "descricao": "Use this method to decline a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "user_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "declineSuggestedPost",
+      "referencia": "https://core.telegram.org/bots/api#declinesuggestedpost",
+      "descricao": "Use this method to decline a suggested post in a direct messages chat. The bot must have the 'can_manage_direct_messages' administrator right in the corresponding channel chat. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_id"
+      ],
+      "opcionais": [
+        "comment"
+      ]
+    },
+    {
+      "nome": "deleteAllMessageReactions",
+      "referencia": "https://core.telegram.org/bots/api#deleteallmessagereactions",
+      "descricao": "Use this method to remove up to 10000 recent reactions in a group or a supergroup chat added by a given user or chat. The bot must have the 'can_delete_messages' administrator right in the chat. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": [
+        "user_id",
+        "actor_chat_id"
+      ]
+    },
+    {
+      "nome": "deleteBusinessMessages",
+      "referencia": "https://core.telegram.org/bots/api#deletebusinessmessages",
+      "descricao": "Delete messages on behalf of a business account. Requires the can_delete_outgoing_messages business bot right to delete messages sent by the bot itself, or the can_delete_all_messages business bot right to delete any message. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "message_ids"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "deleteChatPhoto",
+      "referencia": "https://core.telegram.org/bots/api#deletechatphoto",
+      "descricao": "Use this method to delete a chat photo. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "deleteChatStickerSet",
+      "referencia": "https://core.telegram.org/bots/api#deletechatstickerset",
+      "descricao": "Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set ly returned in getChat requests to check if the bot can use this method. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "deleteEphemeralMessage",
+      "referencia": "https://core.telegram.org/bots/api#deleteephemeralmessage",
+      "descricao": "Use this method to delete an ephemeral message. Note that it is not guaranteed that the user will receive the message deletion event, especially if they are offline. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "receiver_user_id",
+        "ephemeral_message_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "deleteForumTopic",
+      "referencia": "https://core.telegram.org/bots/api#deleteforumtopic",
+      "descricao": "Use this method to delete a forum topic along with all its messages in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_thread_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "deleteMessage",
+      "referencia": "https://core.telegram.org/bots/api#deletemessage",
+      "descricao": "Use this method to delete a message, including service messages, with the following limitations:",
+      "obrigatorios": [
+        "chat_id",
+        "message_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "deleteMessageReaction",
+      "referencia": "https://core.telegram.org/bots/api#deletemessagereaction",
+      "descricao": "Use this method to remove a reaction from a message in a group or a supergroup chat. The bot must have the 'can_delete_messages' administrator right in the chat. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_id"
+      ],
+      "opcionais": [
+        "user_id",
+        "actor_chat_id"
+      ]
+    },
+    {
+      "nome": "deleteMessages",
+      "referencia": "https://core.telegram.org/bots/api#deletemessages",
+      "descricao": "Use this method to delete multiple messages simultaneously. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_ids"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "deleteMyCommands",
+      "referencia": "https://core.telegram.org/bots/api#deletemycommands",
+      "descricao": "Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "scope",
+        "language_code"
+      ]
+    },
+    {
+      "nome": "deleteStickerFromSet",
+      "referencia": "https://core.telegram.org/bots/api#deletestickerfromset",
+      "descricao": "Use this method to delete a sticker from a set created by the bot. Returns True on success.",
+      "obrigatorios": [
+        "sticker"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "deleteStickerSet",
+      "referencia": "https://core.telegram.org/bots/api#deletestickerset",
+      "descricao": "Use this method to delete a sticker set that was created by the bot. Returns True on success.",
+      "obrigatorios": [
+        "name"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "deleteStory",
+      "referencia": "https://core.telegram.org/bots/api#deletestory",
+      "descricao": "Deletes a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "story_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "deleteWebhook",
+      "referencia": "https://core.telegram.org/bots/api#deletewebhook",
+      "descricao": "Use this method to remove webhook integration if you decide to switch back to getUpdates. Returns True on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "drop_pending_updates"
+      ]
+    },
+    {
+      "nome": "editChatInviteLink",
+      "referencia": "https://core.telegram.org/bots/api#editchatinvitelink",
+      "descricao": "Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object.",
+      "obrigatorios": [
+        "chat_id",
+        "invite_link"
+      ],
+      "opcionais": [
+        "name",
+        "expire_date",
+        "member_limit",
+        "creates_join_request"
+      ]
+    },
+    {
+      "nome": "editChatSubscriptionInviteLink",
+      "referencia": "https://core.telegram.org/bots/api#editchatsubscriptioninvitelink",
+      "descricao": "Use this method to edit a subscription invite link created by the bot. The bot must have the can_invite_users administrator rights. Returns the edited invite link as a ChatInviteLink object.",
+      "obrigatorios": [
+        "chat_id",
+        "invite_link"
+      ],
+      "opcionais": [
+        "name"
+      ]
+    },
+    {
+      "nome": "editEphemeralMessageCaption",
+      "referencia": "https://core.telegram.org/bots/api#editephemeralmessagecaption",
+      "descricao": "Use this method to edit the caption of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "receiver_user_id",
+        "ephemeral_message_id"
+      ],
+      "opcionais": [
+        "caption",
+        "show_caption_above_media",
+        "parse_mode",
+        "caption_entities",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "editEphemeralMessageMedia",
+      "referencia": "https://core.telegram.org/bots/api#editephemeralmessagemedia",
+      "descricao": "Use this method to edit the media of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "receiver_user_id",
+        "ephemeral_message_id",
+        "media"
+      ],
+      "opcionais": [
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "editEphemeralMessageReplyMarkup",
+      "referencia": "https://core.telegram.org/bots/api#editephemeralmessagereplymarkup",
+      "descricao": "Use this method to edit only the reply markup of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "receiver_user_id",
+        "ephemeral_message_id"
+      ],
+      "opcionais": [
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "editEphemeralMessageText",
+      "referencia": "https://core.telegram.org/bots/api#editephemeralmessagetext",
+      "descricao": "Use this method to edit an ephemeral text or rich message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline. On success, True is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "receiver_user_id",
+        "ephemeral_message_id"
+      ],
+      "opcionais": [
+        "text",
+        "parse_mode",
+        "entities",
+        "link_preview_options",
+        "rich_message",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "editForumTopic",
+      "referencia": "https://core.telegram.org/bots/api#editforumtopic",
+      "descricao": "Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_thread_id"
+      ],
+      "opcionais": [
+        "name",
+        "icon_custom_emoji_id"
+      ]
+    },
+    {
+      "nome": "editGeneralForumTopic",
+      "referencia": "https://core.telegram.org/bots/api#editgeneralforumtopic",
+      "descricao": "Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "name"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "editMessageCaption",
+      "referencia": "https://core.telegram.org/bots/api#editmessagecaption",
+      "descricao": "Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
+      "obrigatorios": [],
+      "opcionais": [
+        "business_connection_id",
+        "chat_id",
+        "message_id",
+        "inline_message_id",
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "show_caption_above_media",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "editMessageChecklist",
+      "referencia": "https://core.telegram.org/bots/api#editmessagechecklist",
+      "descricao": "Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.",
+      "obrigatorios": [
+        "business_connection_id",
+        "chat_id",
+        "message_id",
+        "checklist"
+      ],
+      "opcionais": [
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "editMessageLiveLocation",
+      "referencia": "https://core.telegram.org/bots/api#editmessagelivelocation",
+      "descricao": "Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.",
+      "obrigatorios": [
+        "latitude",
+        "longitude"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "chat_id",
+        "message_id",
+        "inline_message_id",
+        "live_period",
+        "horizontal_accuracy",
+        "heading",
+        "proximity_alert_radius",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "editMessageMedia",
+      "referencia": "https://core.telegram.org/bots/api#editmessagemedia",
+      "descricao": "Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
+      "obrigatorios": [
+        "media"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "chat_id",
+        "message_id",
+        "inline_message_id",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "editMessageReplyMarkup",
+      "referencia": "https://core.telegram.org/bots/api#editmessagereplymarkup",
+      "descricao": "Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
+      "obrigatorios": [],
+      "opcionais": [
+        "business_connection_id",
+        "chat_id",
+        "message_id",
+        "inline_message_id",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "editMessageText",
+      "referencia": "https://core.telegram.org/bots/api#editmessagetext",
+      "descricao": "Use this method to edit text, rich and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.",
+      "obrigatorios": [],
+      "opcionais": [
+        "business_connection_id",
+        "chat_id",
+        "message_id",
+        "inline_message_id",
+        "text",
+        "parse_mode",
+        "entities",
+        "link_preview_options",
+        "rich_message",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "editStory",
+      "referencia": "https://core.telegram.org/bots/api#editstory",
+      "descricao": "Edits a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns Story on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "story_id",
+        "content"
+      ],
+      "opcionais": [
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "areas"
+      ]
+    },
+    {
+      "nome": "editUserStarSubscription",
+      "referencia": "https://core.telegram.org/bots/api#edituserstarsubscription",
+      "descricao": "Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars. Returns True on success.",
+      "obrigatorios": [
+        "user_id",
+        "telegram_payment_charge_id",
+        "is_canceled"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "exportChatInviteLink",
+      "referencia": "https://core.telegram.org/bots/api#exportchatinvitelink",
+      "descricao": "Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the new invite link as String on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "forwardMessage",
+      "referencia": "https://core.telegram.org/bots/api#forwardmessage",
+      "descricao": "Use this method to forward messages of any kind. Service messages and messages with protected content can't be forwarded. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "from_chat_id",
+        "message_id"
+      ],
+      "opcionais": [
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "video_start_timestamp",
+        "message_effect_id",
+        "suggested_post_parameters",
+        "disable_notification",
+        "protect_content"
+      ]
+    },
+    {
+      "nome": "forwardMessages",
+      "referencia": "https://core.telegram.org/bots/api#forwardmessages",
+      "descricao": "Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages. On success, an Array of MessageId of the sent messages is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "from_chat_id",
+        "message_ids"
+      ],
+      "opcionais": [
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "disable_notification",
+        "protect_content"
+      ]
+    },
+    {
+      "nome": "getAvailableGifts",
+      "referencia": "https://core.telegram.org/bots/api#getavailablegifts",
+      "descricao": "Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters. Returns a Gifts object.",
+      "obrigatorios": [],
+      "opcionais": []
+    },
+    {
+      "nome": "getBusinessAccountGifts",
+      "referencia": "https://core.telegram.org/bots/api#getbusinessaccountgifts",
+      "descricao": "Returns the gifts received and owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns OwnedGifts on success.",
+      "obrigatorios": [
+        "business_connection_id"
+      ],
+      "opcionais": [
+        "exclude_unsaved",
+        "exclude_saved",
+        "exclude_unlimited",
+        "exclude_limited_upgradable",
+        "exclude_limited_non_upgradable",
+        "exclude_from_blockchain",
+        "exclude_unique",
+        "sort_by_price",
+        "offset",
+        "limit"
+      ]
+    },
+    {
+      "nome": "getBusinessAccountStarBalance",
+      "referencia": "https://core.telegram.org/bots/api#getbusinessaccountstarbalance",
+      "descricao": "Returns the amount of Telegram Stars owned by a managed business account. Requires the can_view_gifts_and_stars business bot right. Returns StarAmount on success.",
+      "obrigatorios": [
+        "business_connection_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getBusinessConnection",
+      "referencia": "https://core.telegram.org/bots/api#getbusinessconnection",
+      "descricao": "Use this method to get information about the connection of the bot with a business account. Returns a BusinessConnection object on success.",
+      "obrigatorios": [
+        "business_connection_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getChat",
+      "referencia": "https://core.telegram.org/bots/api#getchat",
+      "descricao": "Use this method to get up-to-date information about the chat. Returns a ChatFullInfo object on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getChatAdministrators",
+      "referencia": "https://core.telegram.org/bots/api#getchatadministrators",
+      "descricao": "Use this method to get a list of administrators in a chat. Returns an Array of ChatMember objects.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": [
+        "return_bots"
+      ]
+    },
+    {
+      "nome": "getChatGifts",
+      "referencia": "https://core.telegram.org/bots/api#getchatgifts",
+      "descricao": "Returns the gifts owned by a chat. Returns OwnedGifts on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": [
+        "exclude_unsaved",
+        "exclude_saved",
+        "exclude_unlimited",
+        "exclude_limited_upgradable",
+        "exclude_limited_non_upgradable",
+        "exclude_from_blockchain",
+        "exclude_unique",
+        "sort_by_price",
+        "offset",
+        "limit"
+      ]
+    },
+    {
+      "nome": "getChatMember",
+      "referencia": "https://core.telegram.org/bots/api#getchatmember",
+      "descricao": "Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.",
+      "obrigatorios": [
+        "chat_id",
+        "user_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getChatMemberCount",
+      "referencia": "https://core.telegram.org/bots/api#getchatmembercount",
+      "descricao": "Use this method to get the number of members in a chat. Returns Integer on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getChatMenuButton",
+      "referencia": "https://core.telegram.org/bots/api#getchatmenubutton",
+      "descricao": "Use this method to get the current value of the bot's menu button in a private chat, or the default menu button. Returns MenuButton on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "chat_id"
+      ]
+    },
+    {
+      "nome": "getCustomEmojiStickers",
+      "referencia": "https://core.telegram.org/bots/api#getcustomemojistickers",
+      "descricao": "Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects.",
+      "obrigatorios": [
+        "custom_emoji_ids"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getFile",
+      "referencia": "https://core.telegram.org/bots/api#getfile",
+      "descricao": "Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot<token>/\\<file_path>, where \\<file_path> is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.",
+      "obrigatorios": [
+        "file_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getForumTopicIconStickers",
+      "referencia": "https://core.telegram.org/bots/api#getforumtopiciconstickers",
+      "descricao": "Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects.",
+      "obrigatorios": [],
+      "opcionais": []
+    },
+    {
+      "nome": "getGameHighScores",
+      "referencia": "https://core.telegram.org/bots/api#getgamehighscores",
+      "descricao": "Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects.",
+      "obrigatorios": [
+        "user_id"
+      ],
+      "opcionais": [
+        "chat_id",
+        "message_id",
+        "inline_message_id"
+      ]
+    },
+    {
+      "nome": "getManagedBotAccessSettings",
+      "referencia": "https://core.telegram.org/bots/api#getmanagedbotaccesssettings",
+      "descricao": "Use this method to get the access settings of a managed bot. Returns a BotAccessSettings object on success.",
+      "obrigatorios": [
+        "user_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getManagedBotToken",
+      "referencia": "https://core.telegram.org/bots/api#getmanagedbottoken",
+      "descricao": "Use this method to get the token of a managed bot. Returns the token as String on success.",
+      "obrigatorios": [
+        "user_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getMe",
+      "referencia": "https://core.telegram.org/bots/api#getme",
+      "descricao": "A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information about the bot in form of a User object.",
+      "obrigatorios": [],
+      "opcionais": []
+    },
+    {
+      "nome": "getMyCommands",
+      "referencia": "https://core.telegram.org/bots/api#getmycommands",
+      "descricao": "Use this method to get the current list of the bot's commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned.",
+      "obrigatorios": [],
+      "opcionais": [
+        "scope",
+        "language_code"
+      ]
+    },
+    {
+      "nome": "getMyDefaultAdministratorRights",
+      "referencia": "https://core.telegram.org/bots/api#getmydefaultadministratorrights",
+      "descricao": "Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "for_channels"
+      ]
+    },
+    {
+      "nome": "getMyDescription",
+      "referencia": "https://core.telegram.org/bots/api#getmydescription",
+      "descricao": "Use this method to get the current bot description for the given user language. Returns BotDescription on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "language_code"
+      ]
+    },
+    {
+      "nome": "getMyName",
+      "referencia": "https://core.telegram.org/bots/api#getmyname",
+      "descricao": "Use this method to get the current bot name for the given user language. Returns BotName on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "language_code"
+      ]
+    },
+    {
+      "nome": "getMyShortDescription",
+      "referencia": "https://core.telegram.org/bots/api#getmyshortdescription",
+      "descricao": "Use this method to get the current bot short description for the given user language. Returns BotShortDescription on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "language_code"
+      ]
+    },
+    {
+      "nome": "getMyStarBalance",
+      "referencia": "https://core.telegram.org/bots/api#getmystarbalance",
+      "descricao": "A method to get the current Telegram Stars balance of the bot. Requires no parameters. On success, returns a StarAmount object.",
+      "obrigatorios": [],
+      "opcionais": []
+    },
+    {
+      "nome": "getStarTransactions",
+      "referencia": "https://core.telegram.org/bots/api#getstartransactions",
+      "descricao": "Returns the bot's Telegram Star transactions in chronological order. On success, returns a StarTransactions object.",
+      "obrigatorios": [],
+      "opcionais": [
+        "offset",
+        "limit"
+      ]
+    },
+    {
+      "nome": "getStickerSet",
+      "referencia": "https://core.telegram.org/bots/api#getstickerset",
+      "descricao": "Use this method to get a sticker set. On success, a StickerSet object is returned.",
+      "obrigatorios": [
+        "name"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getUpdates",
+      "referencia": "https://core.telegram.org/bots/api#getupdates",
+      "descricao": "Use this method to receive incoming updates using long polling (wiki). Returns an Array of Update objects.",
+      "obrigatorios": [],
+      "opcionais": [
+        "offset",
+        "limit",
+        "timeout",
+        "allowed_updates"
+      ]
+    },
+    {
+      "nome": "getUserChatBoosts",
+      "referencia": "https://core.telegram.org/bots/api#getuserchatboosts",
+      "descricao": "Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat. Returns a UserChatBoosts object.",
+      "obrigatorios": [
+        "chat_id",
+        "user_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getUserGifts",
+      "referencia": "https://core.telegram.org/bots/api#getusergifts",
+      "descricao": "Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.",
+      "obrigatorios": [
+        "user_id"
+      ],
+      "opcionais": [
+        "exclude_unlimited",
+        "exclude_limited_upgradable",
+        "exclude_limited_non_upgradable",
+        "exclude_from_blockchain",
+        "exclude_unique",
+        "sort_by_price",
+        "offset",
+        "limit"
+      ]
+    },
+    {
+      "nome": "getUserPersonalChatMessages",
+      "referencia": "https://core.telegram.org/bots/api#getuserpersonalchatmessages",
+      "descricao": "Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user. On success, an Array of Message objects is returned.",
+      "obrigatorios": [
+        "user_id",
+        "limit"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "getUserProfileAudios",
+      "referencia": "https://core.telegram.org/bots/api#getuserprofileaudios",
+      "descricao": "Use this method to get a list of profile audios for a user. Returns a UserProfileAudios object.",
+      "obrigatorios": [
+        "user_id"
+      ],
+      "opcionais": [
+        "offset",
+        "limit"
+      ]
+    },
+    {
+      "nome": "getUserProfilePhotos",
+      "referencia": "https://core.telegram.org/bots/api#getuserprofilephotos",
+      "descricao": "Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.",
+      "obrigatorios": [
+        "user_id"
+      ],
+      "opcionais": [
+        "offset",
+        "limit"
+      ]
+    },
+    {
+      "nome": "getWebhookInfo",
+      "referencia": "https://core.telegram.org/bots/api#getwebhookinfo",
+      "descricao": "Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty.",
+      "obrigatorios": [],
+      "opcionais": []
+    },
+    {
+      "nome": "giftPremiumSubscription",
+      "referencia": "https://core.telegram.org/bots/api#giftpremiumsubscription",
+      "descricao": "Gifts a Telegram Premium subscription to the given user. Returns True on success.",
+      "obrigatorios": [
+        "user_id",
+        "month_count",
+        "star_count"
+      ],
+      "opcionais": [
+        "text",
+        "text_parse_mode",
+        "text_entities"
+      ]
+    },
+    {
+      "nome": "hideGeneralForumTopic",
+      "referencia": "https://core.telegram.org/bots/api#hidegeneralforumtopic",
+      "descricao": "Use this method to hide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. The topic will be automatically closed if it was open. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "leaveChat",
+      "referencia": "https://core.telegram.org/bots/api#leavechat",
+      "descricao": "Use this method for your bot to leave a group, supergroup or channel. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "logOut",
+      "referencia": "https://core.telegram.org/bots/api#logout",
+      "descricao": "Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.",
+      "obrigatorios": [],
+      "opcionais": []
+    },
+    {
+      "nome": "pinChatMessage",
+      "referencia": "https://core.telegram.org/bots/api#pinchatmessage",
+      "descricao": "Use this method to add a message to the list of pinned messages in a chat. In private chats and channel direct messages chats, all non-service messages can be pinned. Conversely, the bot must be an administrator with the 'can_pin_messages' right or the 'can_edit_messages' right to pin messages in groups and channels respectively. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_id"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "disable_notification"
+      ]
+    },
+    {
+      "nome": "postStory",
+      "referencia": "https://core.telegram.org/bots/api#poststory",
+      "descricao": "Posts a story on behalf of a managed business account. Requires the can_manage_stories business bot right. Returns Story on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "content",
+        "active_period"
+      ],
+      "opcionais": [
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "areas",
+        "post_to_chat_page",
+        "protect_content"
+      ]
+    },
+    {
+      "nome": "promoteChatMember",
+      "referencia": "https://core.telegram.org/bots/api#promotechatmember",
+      "descricao": "Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Pass False for all boolean parameters to demote a user. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "user_id"
+      ],
+      "opcionais": [
+        "is_anonymous",
+        "can_manage_chat",
+        "can_delete_messages",
+        "can_manage_video_chats",
+        "can_restrict_members",
+        "can_promote_members",
+        "can_change_info",
+        "can_invite_users",
+        "can_manage_tags",
+        "can_post_stories",
+        "can_edit_stories",
+        "can_delete_stories",
+        "can_post_messages",
+        "can_edit_messages",
+        "can_pin_messages",
+        "can_manage_topics",
+        "can_manage_direct_messages",
+        "can_send_welcome_messages"
+      ]
+    },
+    {
+      "nome": "readBusinessMessage",
+      "referencia": "https://core.telegram.org/bots/api#readbusinessmessage",
+      "descricao": "Marks incoming message as read on behalf of a business account. Requires the can_read_messages business bot right. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "chat_id",
+        "message_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "refundStarPayment",
+      "referencia": "https://core.telegram.org/bots/api#refundstarpayment",
+      "descricao": "Refunds a successful payment in Telegram Stars. Returns True on success.",
+      "obrigatorios": [
+        "user_id",
+        "telegram_payment_charge_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "removeBusinessAccountProfilePhoto",
+      "referencia": "https://core.telegram.org/bots/api#removebusinessaccountprofilephoto",
+      "descricao": "Removes the current profile photo of a managed business account. Requires the can_edit_profile_photo business bot right. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id"
+      ],
+      "opcionais": [
+        "is_public"
+      ]
+    },
+    {
+      "nome": "removeChatVerification",
+      "referencia": "https://core.telegram.org/bots/api#removechatverification",
+      "descricao": "Removes verification from a chat that is currently verified on behalf of the organization represented by the bot. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "removeMyProfilePhoto",
+      "referencia": "https://core.telegram.org/bots/api#removemyprofilephoto",
+      "descricao": "Removes the profile photo of the bot. Requires no parameters. Returns True on success.",
+      "obrigatorios": [],
+      "opcionais": []
+    },
+    {
+      "nome": "removeUserVerification",
+      "referencia": "https://core.telegram.org/bots/api#removeuserverification",
+      "descricao": "Removes verification from a user who is currently verified on behalf of the organization represented by the bot. Returns True on success.",
+      "obrigatorios": [
+        "user_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "reopenForumTopic",
+      "referencia": "https://core.telegram.org/bots/api#reopenforumtopic",
+      "descricao": "Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_thread_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "reopenGeneralForumTopic",
+      "referencia": "https://core.telegram.org/bots/api#reopengeneralforumtopic",
+      "descricao": "Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. The topic will be automatically unhidden if it was hidden. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "replaceManagedBotToken",
+      "referencia": "https://core.telegram.org/bots/api#replacemanagedbottoken",
+      "descricao": "Use this method to revoke the current token of a managed bot and generate a new one. Returns the new token as String on success.",
+      "obrigatorios": [
+        "user_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "replaceStickerInSet",
+      "referencia": "https://core.telegram.org/bots/api#replacestickerinset",
+      "descricao": "Use this method to replace an existing sticker in a sticker set with a new one. The method is equivalent to calling deleteStickerFromSet, then addStickerToSet, then setStickerPositionInSet. Returns True on success.",
+      "obrigatorios": [
+        "user_id",
+        "name",
+        "old_sticker",
+        "sticker"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "repostStory",
+      "referencia": "https://core.telegram.org/bots/api#repoststory",
+      "descricao": "Reposts a story on behalf of a business account from another business account. Both business accounts must be managed by the same bot, and the story on the source account must have been posted (or reposted) by the bot. Requires the can_manage_stories business bot right for both business accounts. Returns Story on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "from_chat_id",
+        "from_story_id",
+        "active_period"
+      ],
+      "opcionais": [
+        "post_to_chat_page",
+        "protect_content"
+      ]
+    },
+    {
+      "nome": "restrictChatMember",
+      "referencia": "https://core.telegram.org/bots/api#restrictchatmember",
+      "descricao": "Use this method to restrict a user in a supergroup. The bot must be an administrator in the supergroup for this to work and must have the appropriate administrator rights. Pass True for all permissions to lift restrictions from a user. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "user_id",
+        "permissions"
+      ],
+      "opcionais": [
+        "use_independent_chat_permissions",
+        "until_date"
+      ]
+    },
+    {
+      "nome": "revokeChatInviteLink",
+      "referencia": "https://core.telegram.org/bots/api#revokechatinvitelink",
+      "descricao": "Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the revoked invite link as ChatInviteLink object.",
+      "obrigatorios": [
+        "chat_id",
+        "invite_link"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "savePreparedInlineMessage",
+      "referencia": "https://core.telegram.org/bots/api#savepreparedinlinemessage",
+      "descricao": "Stores a message that can be sent by a user of a Mini App. Returns a PreparedInlineMessage object.",
+      "obrigatorios": [
+        "user_id",
+        "result"
+      ],
+      "opcionais": [
+        "allow_user_chats",
+        "allow_bot_chats",
+        "allow_group_chats",
+        "allow_channel_chats"
+      ]
+    },
+    {
+      "nome": "savePreparedKeyboardButton",
+      "referencia": "https://core.telegram.org/bots/api#savepreparedkeyboardbutton",
+      "descricao": "Stores a keyboard button that can be used by a user within a Mini App. Returns a PreparedKeyboardButton object.",
+      "obrigatorios": [
+        "user_id",
+        "button"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "sendAnimation",
+      "referencia": "https://core.telegram.org/bots/api#sendanimation",
+      "descricao": "Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.",
+      "obrigatorios": [
+        "chat_id",
+        "animation"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "duration",
+        "width",
+        "height",
+        "thumbnail",
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "show_caption_above_media",
+        "has_spoiler",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendAudio",
+      "referencia": "https://core.telegram.org/bots/api#sendaudio",
+      "descricao": "Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.",
+      "obrigatorios": [
+        "chat_id",
+        "audio"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "duration",
+        "performer",
+        "title",
+        "thumbnail",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendChatAction",
+      "referencia": "https://core.telegram.org/bots/api#sendchataction",
+      "descricao": "Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "action"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id"
+      ]
+    },
+    {
+      "nome": "sendChatJoinRequestWebApp",
+      "referencia": "https://core.telegram.org/bots/api#sendchatjoinrequestwebapp",
+      "descricao": "Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome. Returns True on success.",
+      "obrigatorios": [
+        "chat_join_request_query_id",
+        "web_app_url"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "sendChecklist",
+      "referencia": "https://core.telegram.org/bots/api#sendchecklist",
+      "descricao": "Use this method to send a checklist on behalf of a connected business account. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "business_connection_id",
+        "chat_id",
+        "checklist"
+      ],
+      "opcionais": [
+        "disable_notification",
+        "protect_content",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "sendContact",
+      "referencia": "https://core.telegram.org/bots/api#sendcontact",
+      "descricao": "Use this method to send phone contacts. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "phone_number",
+        "first_name"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "last_name",
+        "vcard",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendDice",
+      "referencia": "https://core.telegram.org/bots/api#senddice",
+      "descricao": "Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "emoji",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendDocument",
+      "referencia": "https://core.telegram.org/bots/api#senddocument",
+      "descricao": "Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.",
+      "obrigatorios": [
+        "chat_id",
+        "document"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "thumbnail",
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "disable_content_type_detection",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendGame",
+      "referencia": "https://core.telegram.org/bots/api#sendgame",
+      "descricao": "Use this method to send a game. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "game_short_name"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendGift",
+      "referencia": "https://core.telegram.org/bots/api#sendgift",
+      "descricao": "Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver. Returns True on success.",
+      "obrigatorios": [
+        "gift_id"
+      ],
+      "opcionais": [
+        "user_id",
+        "chat_id",
+        "pay_for_upgrade",
+        "text",
+        "text_parse_mode",
+        "text_entities"
+      ]
+    },
+    {
+      "nome": "sendInvoice",
+      "referencia": "https://core.telegram.org/bots/api#sendinvoice",
+      "descricao": "Use this method to send invoices. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "title",
+        "description",
+        "payload",
+        "currency",
+        "prices"
+      ],
+      "opcionais": [
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "provider_token",
+        "max_tip_amount",
+        "suggested_tip_amounts",
+        "start_parameter",
+        "provider_data",
+        "photo_url",
+        "photo_size",
+        "photo_width",
+        "photo_height",
+        "need_name",
+        "need_phone_number",
+        "need_email",
+        "need_shipping_address",
+        "send_phone_number_to_provider",
+        "send_email_to_provider",
+        "is_flexible",
+        "suggested_post_parameters",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendLivePhoto",
+      "referencia": "https://core.telegram.org/bots/api#sendlivephoto",
+      "descricao": "Use this method to send live photos. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "live_photo",
+        "photo"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "show_caption_above_media",
+        "has_spoiler",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "message_effect_id",
+        "suggested_post_parameters",
+        "reply_parameters",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "sendLocation",
+      "referencia": "https://core.telegram.org/bots/api#sendlocation",
+      "descricao": "Use this method to send point on the map. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "latitude",
+        "longitude"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "horizontal_accuracy",
+        "live_period",
+        "heading",
+        "proximity_alert_radius",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendMediaGroup",
+      "referencia": "https://core.telegram.org/bots/api#sendmediagroup",
+      "descricao": "Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of Message objects that were sent is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "media"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendMessage",
+      "referencia": "https://core.telegram.org/bots/api#sendmessage",
+      "descricao": "Use this method to send text messages. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "text"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "parse_mode",
+        "entities",
+        "link_preview_options",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendMessageDraft",
+      "referencia": "https://core.telegram.org/bots/api#sendmessagedraft",
+      "descricao": "Use this method to stream a partial message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendMessage with the complete message to persist it in the user's chat. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "draft_id"
+      ],
+      "opcionais": [
+        "message_thread_id",
+        "text",
+        "parse_mode",
+        "entities",
+        "can_stop",
+        "keep_on_stop"
+      ]
+    },
+    {
+      "nome": "sendPaidMedia",
+      "referencia": "https://core.telegram.org/bots/api#sendpaidmedia",
+      "descricao": "Use this method to send paid media. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "star_count",
+        "media"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "payload",
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "show_caption_above_media",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "reply_parameters",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "sendPhoto",
+      "referencia": "https://core.telegram.org/bots/api#sendphoto",
+      "descricao": "Use this method to send photos. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "photo"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "show_caption_above_media",
+        "has_spoiler",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendPoll",
+      "referencia": "https://core.telegram.org/bots/api#sendpoll",
+      "descricao": "Use this method to send a native poll. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "question",
+        "options"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "question_parse_mode",
+        "question_entities",
+        "is_anonymous",
+        "type",
+        "allows_multiple_answers",
+        "allows_revoting",
+        "shuffle_options",
+        "allow_adding_options",
+        "hide_results_until_closes",
+        "members_only",
+        "country_codes",
+        "correct_option_ids",
+        "explanation",
+        "explanation_parse_mode",
+        "explanation_entities",
+        "explanation_media",
+        "description",
+        "description_parse_mode",
+        "description_entities",
+        "media",
+        "open_period",
+        "close_date",
+        "is_closed",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendRichMessage",
+      "referencia": "https://core.telegram.org/bots/api#sendrichmessage",
+      "descricao": "Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "rich_message"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "message_effect_id",
+        "suggested_post_parameters",
+        "reply_parameters",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "sendRichMessageDraft",
+      "referencia": "https://core.telegram.org/bots/api#sendrichmessagedraft",
+      "descricao": "Use this method to stream a partial rich message to a user while the message is being generated. Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized, you must call sendRichMessage with the complete message to persist it in the user's chat. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "draft_id",
+        "rich_message"
+      ],
+      "opcionais": [
+        "message_thread_id",
+        "can_stop",
+        "keep_on_stop"
+      ]
+    },
+    {
+      "nome": "sendSticker",
+      "referencia": "https://core.telegram.org/bots/api#sendsticker",
+      "descricao": "Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "sticker"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "emoji",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendVenue",
+      "referencia": "https://core.telegram.org/bots/api#sendvenue",
+      "descricao": "Use this method to send information about a venue. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "latitude",
+        "longitude",
+        "title",
+        "address"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "foursquare_id",
+        "foursquare_type",
+        "google_place_id",
+        "google_place_type",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendVideo",
+      "referencia": "https://core.telegram.org/bots/api#sendvideo",
+      "descricao": "Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as Document). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.",
+      "obrigatorios": [
+        "chat_id",
+        "video"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "duration",
+        "width",
+        "height",
+        "thumbnail",
+        "cover",
+        "start_timestamp",
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "show_caption_above_media",
+        "has_spoiler",
+        "supports_streaming",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendVideoNote",
+      "referencia": "https://core.telegram.org/bots/api#sendvideonote",
+      "descricao": "Use this method to send video messages. On success, the sent Message is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "video_note"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "duration",
+        "length",
+        "thumbnail",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "sendVoice",
+      "referencia": "https://core.telegram.org/bots/api#sendvoice",
+      "descricao": "Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.",
+      "obrigatorios": [
+        "chat_id",
+        "voice"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_thread_id",
+        "direct_messages_topic_id",
+        "ephemeral_message_parameters",
+        "caption",
+        "parse_mode",
+        "caption_entities",
+        "duration",
+        "disable_notification",
+        "protect_content",
+        "allow_paid_broadcast",
+        "suggested_post_parameters",
+        "message_effect_id",
+        "reply_parameters",
+        "reply_markup",
+        "reply_to_message_id"
+      ]
+    },
+    {
+      "nome": "setBusinessAccountBio",
+      "referencia": "https://core.telegram.org/bots/api#setbusinessaccountbio",
+      "descricao": "Changes the bio of a managed business account. Requires the can_change_bio business bot right. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id"
+      ],
+      "opcionais": [
+        "bio"
+      ]
+    },
+    {
+      "nome": "setBusinessAccountGiftSettings",
+      "referencia": "https://core.telegram.org/bots/api#setbusinessaccountgiftsettings",
+      "descricao": "Changes the privacy settings pertaining to incoming gifts in a managed business account. Requires the can_change_gift_settings business bot right. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "show_gift_button",
+        "accepted_gift_types"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "setBusinessAccountName",
+      "referencia": "https://core.telegram.org/bots/api#setbusinessaccountname",
+      "descricao": "Changes the first and last name of a managed business account. Requires the can_change_name business bot right. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "first_name"
+      ],
+      "opcionais": [
+        "last_name"
+      ]
+    },
+    {
+      "nome": "setBusinessAccountProfilePhoto",
+      "referencia": "https://core.telegram.org/bots/api#setbusinessaccountprofilephoto",
+      "descricao": "Changes the profile photo of a managed business account. Requires the can_edit_profile_photo business bot right. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "photo"
+      ],
+      "opcionais": [
+        "is_public"
+      ]
+    },
+    {
+      "nome": "setBusinessAccountUsername",
+      "referencia": "https://core.telegram.org/bots/api#setbusinessaccountusername",
+      "descricao": "Changes the username of a managed business account. Requires the can_change_username business bot right. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id"
+      ],
+      "opcionais": [
+        "username"
+      ]
+    },
+    {
+      "nome": "setChatAdministratorCustomTitle",
+      "referencia": "https://core.telegram.org/bots/api#setchatadministratorcustomtitle",
+      "descricao": "Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "user_id",
+        "custom_title"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "setChatDescription",
+      "referencia": "https://core.telegram.org/bots/api#setchatdescription",
+      "descricao": "Use this method to change the description of a group, a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": [
+        "description"
+      ]
+    },
+    {
+      "nome": "setChatMemberTag",
+      "referencia": "https://core.telegram.org/bots/api#setchatmembertag",
+      "descricao": "Use this method to set a tag for a regular member in a group or a supergroup. The bot must be an administrator in the chat for this to work and must have the “can_manage_tags” administrator right. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "user_id"
+      ],
+      "opcionais": [
+        "tag"
+      ]
+    },
+    {
+      "nome": "setChatMenuButton",
+      "referencia": "https://core.telegram.org/bots/api#setchatmenubutton",
+      "descricao": "Use this method to change the bot's menu button in a private chat, or the default menu button. Returns True on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "chat_id",
+        "menu_button"
+      ]
+    },
+    {
+      "nome": "setChatPermissions",
+      "referencia": "https://core.telegram.org/bots/api#setchatpermissions",
+      "descricao": "Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "permissions"
+      ],
+      "opcionais": [
+        "use_independent_chat_permissions"
+      ]
+    },
+    {
+      "nome": "setChatPhoto",
+      "referencia": "https://core.telegram.org/bots/api#setchatphoto",
+      "descricao": "Use this method to set a new profile photo for the chat. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "photo"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "setChatStickerSet",
+      "referencia": "https://core.telegram.org/bots/api#setchatstickerset",
+      "descricao": "Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set ly returned in getChat requests to check if the bot can use this method. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "sticker_set_name"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "setChatTitle",
+      "referencia": "https://core.telegram.org/bots/api#setchattitle",
+      "descricao": "Use this method to change the title of a chat. Titles can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "title"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "setCustomEmojiStickerSetThumbnail",
+      "referencia": "https://core.telegram.org/bots/api#setcustomemojistickersetthumbnail",
+      "descricao": "Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.",
+      "obrigatorios": [
+        "name"
+      ],
+      "opcionais": [
+        "custom_emoji_id"
+      ]
+    },
+    {
+      "nome": "setGameScore",
+      "referencia": "https://core.telegram.org/bots/api#setgamescore",
+      "descricao": "Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the Message is returned, otherwise True is returned. Returns an error, if the new score is not greater than the user's current score in the chat and force is False.",
+      "obrigatorios": [
+        "user_id",
+        "score"
+      ],
+      "opcionais": [
+        "force",
+        "disable_edit_message",
+        "chat_id",
+        "message_id",
+        "inline_message_id"
+      ]
+    },
+    {
+      "nome": "setManagedBotAccessSettings",
+      "referencia": "https://core.telegram.org/bots/api#setmanagedbotaccesssettings",
+      "descricao": "Use this method to change the access settings of a managed bot. Returns True on success.",
+      "obrigatorios": [
+        "user_id",
+        "is_access_restricted"
+      ],
+      "opcionais": [
+        "added_user_ids"
+      ]
+    },
+    {
+      "nome": "setMessageReaction",
+      "referencia": "https://core.telegram.org/bots/api#setmessagereaction",
+      "descricao": "Use this method to change the chosen reactions on a message. Service messages of some types can't be reacted to. Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel. Bots can't use paid reactions. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_id"
+      ],
+      "opcionais": [
+        "reaction",
+        "is_big"
+      ]
+    },
+    {
+      "nome": "setMyCommands",
+      "referencia": "https://core.telegram.org/bots/api#setmycommands",
+      "descricao": "Use this method to change the list of the bot's commands. See https://core.telegram.org/bots/features#commands for more details about bot commands. Returns True on success.",
+      "obrigatorios": [
+        "commands"
+      ],
+      "opcionais": [
+        "scope",
+        "language_code"
+      ]
+    },
+    {
+      "nome": "setMyDefaultAdministratorRights",
+      "referencia": "https://core.telegram.org/bots/api#setmydefaultadministratorrights",
+      "descricao": "Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels. These rights will be suggested to users, but they are free to modify the list before adding the bot. Returns True on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "rights",
+        "for_channels"
+      ]
+    },
+    {
+      "nome": "setMyDescription",
+      "referencia": "https://core.telegram.org/bots/api#setmydescription",
+      "descricao": "Use this method to change the bot's description, which is shown in the chat with the bot if the chat is empty. Returns True on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "description",
+        "language_code"
+      ]
+    },
+    {
+      "nome": "setMyName",
+      "referencia": "https://core.telegram.org/bots/api#setmyname",
+      "descricao": "Use this method to change the bot's name. Returns True on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "name",
+        "language_code"
+      ]
+    },
+    {
+      "nome": "setMyProfilePhoto",
+      "referencia": "https://core.telegram.org/bots/api#setmyprofilephoto",
+      "descricao": "Changes the profile photo of the bot. Returns True on success.",
+      "obrigatorios": [
+        "photo"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "setMyShortDescription",
+      "referencia": "https://core.telegram.org/bots/api#setmyshortdescription",
+      "descricao": "Use this method to change the bot's short description, which is shown on the bot's profile page and is sent together with the link when users share the bot. Returns True on success.",
+      "obrigatorios": [],
+      "opcionais": [
+        "short_description",
+        "language_code"
+      ]
+    },
+    {
+      "nome": "setPassportDataErrors",
+      "referencia": "https://core.telegram.org/bots/api#setpassportdataerrors",
+      "descricao": "Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns True on success.",
+      "obrigatorios": [
+        "user_id",
+        "errors"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "setStickerEmojiList",
+      "referencia": "https://core.telegram.org/bots/api#setstickeremojilist",
+      "descricao": "Use this method to change the list of emoji assigned to a regular or custom emoji sticker. The sticker must belong to a sticker set created by the bot. Returns True on success.",
+      "obrigatorios": [
+        "sticker",
+        "emoji_list"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "setStickerKeywords",
+      "referencia": "https://core.telegram.org/bots/api#setstickerkeywords",
+      "descricao": "Use this method to change search keywords assigned to a regular or custom emoji sticker. The sticker must belong to a sticker set created by the bot. Returns True on success.",
+      "obrigatorios": [
+        "sticker"
+      ],
+      "opcionais": [
+        "keywords"
+      ]
+    },
+    {
+      "nome": "setStickerMaskPosition",
+      "referencia": "https://core.telegram.org/bots/api#setstickermaskposition",
+      "descricao": "Use this method to change the mask position of a mask sticker. The sticker must belong to a sticker set that was created by the bot. Returns True on success.",
+      "obrigatorios": [
+        "sticker"
+      ],
+      "opcionais": [
+        "mask_position"
+      ]
+    },
+    {
+      "nome": "setStickerPositionInSet",
+      "referencia": "https://core.telegram.org/bots/api#setstickerpositioninset",
+      "descricao": "Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success.",
+      "obrigatorios": [
+        "sticker",
+        "position"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "setStickerSetThumbnail",
+      "referencia": "https://core.telegram.org/bots/api#setstickersetthumbnail",
+      "descricao": "Use this method to set the thumbnail of a regular or mask sticker set. The format of the thumbnail file must match the format of the stickers in the set. Returns True on success.",
+      "obrigatorios": [
+        "name",
+        "user_id",
+        "format"
+      ],
+      "opcionais": [
+        "thumbnail"
+      ]
+    },
+    {
+      "nome": "setStickerSetTitle",
+      "referencia": "https://core.telegram.org/bots/api#setstickersettitle",
+      "descricao": "Use this method to set the title of a created sticker set. Returns True on success.",
+      "obrigatorios": [
+        "name",
+        "title"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "setUserEmojiStatus",
+      "referencia": "https://core.telegram.org/bots/api#setuseremojistatus",
+      "descricao": "Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method requestEmojiStatusAccess. Returns True on success.",
+      "obrigatorios": [
+        "user_id"
+      ],
+      "opcionais": [
+        "emoji_status_custom_emoji_id",
+        "emoji_status_expiration_date"
+      ]
+    },
+    {
+      "nome": "setWebhook",
+      "referencia": "https://core.telegram.org/bots/api#setwebhook",
+      "descricao": "Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized Update. In case of an unsuccessful request (a request with response HTTP status code different from 2XY), we will repeat the request and give up after a reasonable amount of attempts. Returns True on success.",
+      "obrigatorios": [
+        "url"
+      ],
+      "opcionais": [
+        "certificate",
+        "ip_address",
+        "max_connections",
+        "allowed_updates",
+        "drop_pending_updates",
+        "secret_token"
+      ]
+    },
+    {
+      "nome": "stopMessageLiveLocation",
+      "referencia": "https://core.telegram.org/bots/api#stopmessagelivelocation",
+      "descricao": "Use this method to stop updating a live location message before live_period expires. On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned.",
+      "obrigatorios": [],
+      "opcionais": [
+        "business_connection_id",
+        "chat_id",
+        "message_id",
+        "inline_message_id",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "stopPoll",
+      "referencia": "https://core.telegram.org/bots/api#stoppoll",
+      "descricao": "Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned.",
+      "obrigatorios": [
+        "chat_id",
+        "message_id"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "reply_markup"
+      ]
+    },
+    {
+      "nome": "transferBusinessAccountStars",
+      "referencia": "https://core.telegram.org/bots/api#transferbusinessaccountstars",
+      "descricao": "Transfers Telegram Stars from the business account balance to the bot's balance. Requires the can_transfer_stars business bot right. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "star_count"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "transferGift",
+      "referencia": "https://core.telegram.org/bots/api#transfergift",
+      "descricao": "Transfers an owned unique gift to another user. Requires the can_transfer_and_upgrade_gifts business bot right. Requires can_transfer_stars business bot right if the transfer is paid. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "owned_gift_id",
+        "new_owner_chat_id",
+        "star_count"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "unbanChatMember",
+      "referencia": "https://core.telegram.org/bots/api#unbanchatmember",
+      "descricao": "Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "user_id"
+      ],
+      "opcionais": [
+        "only_if_banned"
+      ]
+    },
+    {
+      "nome": "unbanChatSenderChat",
+      "referencia": "https://core.telegram.org/bots/api#unbanchatsenderchat",
+      "descricao": "Use this method to unban a previously banned channel chat in a supergroup or channel. The bot must be an administrator for this to work and must have the appropriate administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "sender_chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "unhideGeneralForumTopic",
+      "referencia": "https://core.telegram.org/bots/api#unhidegeneralforumtopic",
+      "descricao": "Use this method to unhide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "unpinAllChatMessages",
+      "referencia": "https://core.telegram.org/bots/api#unpinallchatmessages",
+      "descricao": "Use this method to clear the list of pinned messages in a chat. In private chats and channel direct messages chats, no additional rights are required to unpin all pinned messages. Conversely, the bot must be an administrator with the 'can_pin_messages' right or the 'can_edit_messages' right to unpin all pinned messages in groups and channels respectively. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "unpinAllForumTopicMessages",
+      "referencia": "https://core.telegram.org/bots/api#unpinallforumtopicmessages",
+      "descricao": "Use this method to clear the list of pinned messages in a forum topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success.",
+      "obrigatorios": [
+        "chat_id",
+        "message_thread_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "unpinAllGeneralForumTopicMessages",
+      "referencia": "https://core.telegram.org/bots/api#unpinallgeneralforumtopicmessages",
+      "descricao": "Use this method to clear the list of pinned messages in a General forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "unpinChatMessage",
+      "referencia": "https://core.telegram.org/bots/api#unpinchatmessage",
+      "descricao": "Use this method to remove a message from the list of pinned messages in a chat. In private chats and channel direct messages chats, all messages can be unpinned. Conversely, the bot must be an administrator with the 'can_pin_messages' right or the 'can_edit_messages' right to unpin messages in groups and channels respectively. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": [
+        "business_connection_id",
+        "message_id"
+      ]
+    },
+    {
+      "nome": "upgradeGift",
+      "referencia": "https://core.telegram.org/bots/api#upgradegift",
+      "descricao": "Upgrades a given regular gift to a unique gift. Requires the can_transfer_and_upgrade_gifts business bot right. Additionally requires the can_transfer_stars business bot right if the upgrade is paid. Returns True on success.",
+      "obrigatorios": [
+        "business_connection_id",
+        "owned_gift_id"
+      ],
+      "opcionais": [
+        "keep_original_details",
+        "star_count"
+      ]
+    },
+    {
+      "nome": "uploadStickerFile",
+      "referencia": "https://core.telegram.org/bots/api#uploadstickerfile",
+      "descricao": "Use this method to upload a file with a sticker for later use in the createNewStickerSet, addStickerToSet, or replaceStickerInSet methods (the file can be used multiple times). Returns the uploaded File on success.",
+      "obrigatorios": [
+        "user_id",
+        "sticker_format",
+        "sticker"
+      ],
+      "opcionais": []
+    },
+    {
+      "nome": "verifyChat",
+      "referencia": "https://core.telegram.org/bots/api#verifychat",
+      "descricao": "Verifies a chat on behalf of the organization which is represented by the bot. Returns True on success.",
+      "obrigatorios": [
+        "chat_id"
+      ],
+      "opcionais": [
+        "custom_description"
+      ]
+    },
+    {
+      "nome": "verifyUser",
+      "referencia": "https://core.telegram.org/bots/api#verifyuser",
+      "descricao": "Verifies a user on behalf of the organization which is represented by the bot. Returns True on success.",
+      "obrigatorios": [
+        "user_id"
+      ],
+      "opcionais": [
+        "custom_description"
+      ]
+    }
+  ]
+}

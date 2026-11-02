@@ -1,3 +1,13 @@
+import { criarMiddlewarePlataforma } from './core/plataforma/updates.js';
+import { plataforma,requisitosPlataforma } from './core/plataforma/store.js';
+import { configurarWebhook,UPDATES_PLATAFORMA } from './core/plataforma/webhook.js';
+import { iniciarManutencao } from './core/manutencao.js';
+import { instalarLimitesTelegram } from './core/telegram-limites.js';
+import { adquirirLock } from './core/processo-lock.js';
+import { processarAntispam } from './core/antispam.js';
+import { processarAutomacao } from "./core/automacao.js";
+import { processarComunidade } from "./core/comunidade.js";
+import { iniciarLembretes } from "./core/lembretes.js";
 import { Telegraf } from "telegraf";
 import chalk from "chalk";
 import cron from "node-cron";
@@ -34,17 +44,31 @@ if (problemas.some((p) => p.includes("BOT_TOKEN"))) {
   process.exit(1);
 }
 
+const liberarLock = adquirirLock();
 const waguri = new Telegraf(botConfig.token, { handlerTimeout: 120000 });
 
+instalarLimitesTelegram(waguri.telegram);
 ligarTelegram(waguri.telegram);
+let pararManutencao = async () => {};
+let servidorPainel = null;
+let pararLembretes = async () => {};
 
 await loadCommands();
 
+waguri.use(criarMiddlewarePlataforma());
 waguri.on("message", criarHandlerMensagem(waguri));
 waguri.on("callback_query", criarHandlerCallback(waguri));
-waguri.catch((err, ctx) =>
-  logErro(`Erro nao tratado no update ${ctx.updateType}`, err),
-);
+waguri.on("edited_message", async (ctx) => {
+  if (ctx.from?.is_bot) return;
+  const mensagem = ctx.editedMessage;
+  if (await processarAntispam(ctx, {mensagem, editada:true})) return;
+  if (await processarComunidade(ctx, {mensagem})) return;
+  await processarAutomacao(ctx, {mensagem, editada: true});
+});
+waguri.catch((err, ctx) => {
+  logErro(`Erro nao tratado no update ${ctx.updateType}`, err);
+  if(plataforma.transporte==='webhook')throw err;
+});
 
 const contaInicial = garantirContaInicial();
 if (contaInicial)
@@ -59,7 +83,7 @@ const key = await verificarKey();
 if (key.ok) logSucesso(`OKARUN API conectada (${botConfig.okarun.baseUrl})`);
 else logAviso(`OKARUN API indisponivel: ${key.motivo ?? "desconhecido"}`);
 
-cron.schedule(
+const limpezaDiaria = cron.schedule(
   "0 3 * * *",
   () => {
     const vips = limparVipsExpirados();
@@ -77,14 +101,15 @@ cron.schedule(
 if (botConfig.painel.enabled) {
   try {
     const { iniciarPainel } = await import("./painel/server.js");
-    await iniciarPainel(waguri);
+    servidorPainel = await iniciarPainel(waguri);
   } catch (err) {
     logAviso(`Painel web nao subiu: ${err.message}`);
   }
 }
 
-waguri
-  .launch({ dropPendingUpdates: true }, () => {
+const aoConectar = () => {
+    pararLembretes = iniciarLembretes(waguri.telegram);
+    pararManutencao = iniciarManutencao(waguri.telegram);
     const eu = waguri.botInfo;
 
     console.log(banner3.string);
@@ -102,19 +127,27 @@ waguri
     console.log(
       chalk.gray(`  Donos:     ${botConfig.owners.join(", ") || "nenhum"}\n`),
     );
-  })
-  .catch((err) => {
-    logErro("Falha ao conectar no Telegram", err);
-    process.exit(1);
-  });
+};
+if(!['polling','webhook'].includes(plataforma.transporte))throw new Error('TELEGRAM_TRANSPORT invalido');
+if(plataforma.transporte==='webhook'){
+  if(!servidorPainel)throw new Error('Webhook exige servidor HTTP ativo');
+  await configurarWebhook(waguri);aoConectar();
+}else{
+  waguri.launch({dropPendingUpdates:false,allowedUpdates:UPDATES_PLATAFORMA},aoConectar).catch(err=>{logErro('Falha ao conectar no Telegram',err);process.exit(1);});
+}
 for (const sinal of ["SIGINT", "SIGTERM"]) {
-  process.once(sinal, () => {
+  process.once(sinal, async () => {
     logInfo(`Recebi ${sinal}, desligando...`);
     try {
       waguri.stop(sinal);
     } catch {
       logInfo("Bot ja estava parado");
     }
+    limpezaDiaria.stop();
+    await Promise.all([pararLembretes(), pararManutencao()]);
+    if(servidorPainel) { servidorPainel.closeIdleConnections?.(); await new Promise(resolve=>servidorPainel.close(resolve)); }
+    liberarLock();
+    await limpezaDiaria.destroy();
     fecharDb();
     logSucesso("Banco fechado. Ate mais!");
     process.exit(0);

@@ -4,7 +4,9 @@ export function escapeHtml(texto) {
   return String(texto ?? '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 export function cortar(texto, limite = LIMITE_LEGENDA) {
   const str = String(texto ?? '');
@@ -84,16 +86,30 @@ export function toUnicodeBoldUpper(texto) {
     })
     .join('');
 }
+export function urlHttpValida(valor) {
+  if(typeof valor!=='string'||valor.length>8000||/[\s<>"']/.test(valor))return false;
+  try {
+    const u=new URL(valor),h=u.hostname.toLowerCase();
+    if(!['http:','https:'].includes(u.protocol)||u.username||u.password)return false;
+    if(h==='localhost'||h.endsWith('.localhost')||h.endsWith('.local')||h.includes(':')||/^127\.|^10\.|^192\.168\.|^169\.254\.|^0\.|^172\.(1[6-9]|2\d|3[01])\./.test(h))return false;
+    return Boolean(h.includes('.'));
+  }catch{return false;}
+}
+const deDominio=(valor,dominios)=>{
+  if(!urlHttpValida(valor))return false;
+  const h=new URL(valor).hostname.toLowerCase();
+  return dominios.some(d=>h===d||h.endsWith('.'+d));
+};
 export const links = {
-  instagram: (url) => /(?:instagram\.com|instagr\.am)/i.test(url),
-  youtube: (url) => /(?:youtube\.com\/(?:watch|shorts|embed|live|playlist)|youtu\.be\/)/i.test(url),
-  tiktok: (url) => /(?:tiktok\.com|vm\.tiktok\.com|vt\.tiktok\.com)/i.test(url),
-  pinterest: (url) => /(?:pinterest\.[a-z.]+|pin\.it)/i.test(url),
-  mediafire: (url) => /mediafire\.com/i.test(url),
-  kwai: (url) => /(?:kwai\.com|kwai-video\.com|kw\.ai)/i.test(url),
-  twitter: (url) => /(?:twitter\.com|x\.com)/i.test(url),
-  spotify: (url) => /spotify\.com/i.test(url),
-  qualquer: (url) => /^https?:\/\/\S+$/i.test(url),
+  instagram: u=>deDominio(u,['instagram.com','instagr.am']),
+  youtube: u=>deDominio(u,['youtube.com','youtu.be']),
+  tiktok: u=>deDominio(u,['tiktok.com']),
+  pinterest: u=>deDominio(u,['pinterest.com','pinterest.com.br','pinterest.pt','pinterest.co.uk','pinterest.es','pinterest.fr','pinterest.de','pin.it']),
+  mediafire: u=>deDominio(u,['mediafire.com']),
+  kwai: u=>deDominio(u,['kwai.com','kwai-video.com','kw.ai']),
+  twitter: u=>deDominio(u,['twitter.com','x.com']),
+  spotify: u=>deDominio(u,['spotify.com']),
+  qualquer: urlHttpValida,
 };
 export function extrairUrl(texto) {
   const achado = texto.match(/https?:\/\/[^\s<>"']+/i);

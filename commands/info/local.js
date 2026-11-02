@@ -1,0 +1,2 @@
+export const description='Envia uma localizacao com coordenadas informadas explicitamente';
+export default ctx=>{const [lat,lon]=ctx.args.map(Number);if(ctx.args.length!==2||!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)return ctx.erro('/local LATITUDE LONGITUDE. Exemplo: /local -3.1 -60.0');return ctx.waguri.telegram.callApi('sendLocation',{chat_id:ctx.chatId,latitude:lat,longitude:lon});};

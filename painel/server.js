@@ -1,3 +1,9 @@
+import { criarMiniApi,criarPlataformaAdminApi } from './plataforma-api.js';
+import { criarWebhookHandler } from '../core/plataforma/webhook.js';
+import { runtime } from '../core/manutencao.js';
+import { criarGestaoApi } from './gestao-api.js';
+import { obterAutomacao, salvarAutomacao, validarAutomacao } from "../core/automacao.js";
+import { limitarHttp } from "../core/limite-http.js";
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -79,6 +85,24 @@ const __dirname = path.dirname(__filename);
 export async function iniciarPainel(waguri) {
   const app = express();
   app.disable("x-powered-by");
+  app.use((req, res, next) => {
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.setHeader("Referrer-Policy", "same-origin");
+    if (req.path.startsWith("/api")) res.setHeader("Cache-Control", "no-store");
+    next();
+  });
+  const limiteAuth = limitarHttp();
+  app.use(["/api/auth/login", "/api/auth/registrar"], limiteAuth);
+  app.use((req,res,next)=>{
+    if(req.path.startsWith('/api')&&!['GET','HEAD','OPTIONS'].includes(req.method)){
+      const origin=req.get('origin');let valido=true;
+      if(origin)try{valido=new URL(origin).host===req.get('host')||Boolean(botConfig.painel.urlPublica&&origin===new URL(botConfig.painel.urlPublica).origin);}catch{valido=false;}
+      if(!valido||req.get('sec-fetch-site')==='cross-site')return res.status(403).json({erro:'Origem nao permitida'});
+    }
+    if(['/gestao.html','/plataforma.html'].includes(req.path))res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'");
+    if(req.path==='/miniapp.html')res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self' https://telegram.org; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'");
+    next();
+  });
   app.use(express.json({ limit: "100kb" }));
   app.use(express.static(path.join(__dirname, "public")));
 
@@ -91,14 +115,20 @@ export async function iniciarPainel(waguri) {
   }
 
   ligarAcoes(waguri.telegram, username);
+  app.use("/api/gestao", criarGestaoApi(waguri.telegram));
+  app.use('/api/mini',criarMiniApi(waguri.telegram));
+  app.use('/api/plataforma',criarPlataformaAdminApi(waguri.telegram));
+  app.post('/telegram/webhook',criarWebhookHandler(waguri));
+  app.get("/healthz", (_req,res)=>res.json({ok:true,versao:"5.0.0"}));
+  app.get('/readyz',(_req,res)=>{
+    const ok=Boolean(runtime.ultimoCiclo&&Date.now()-runtime.ultimoCiclo<60000);
+    res.status(ok?200:503).json({ok});
+  });
 
-  const ipDe = (req) =>
-    (req.headers["x-forwarded-for"] ?? "").split(",")[0].trim() ||
-    req.socket.remoteAddress ||
-    "";
+  const ipDe = (req) => req.ip || req.socket.remoteAddress || "";
 
   const cookieSessao = (token) =>
-    `kw_token=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${7 * 24 * 3600}`;
+    `kw_token=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${7 * 24 * 3600}${botConfig.painel.urlPublica.startsWith("https://") ? "; Secure" : ""}`;
 
   app.post("/api/auth/registrar", (req, res) => {
     if (!botConfig.painel.registroAberto) {
@@ -109,7 +139,7 @@ export async function iniciarPainel(waguri) {
     }
 
     const { email, senha, nome } = req.body ?? {};
-    const r = criarConta({ email, senha, nome });
+    const r = criarConta({ email, senha, nome, papel: "membro" });
 
     if (!r.ok) {
       res.status(400).json({ erro: r.motivo });
@@ -262,8 +292,14 @@ export async function iniciarPainel(waguri) {
       res.status(400).json({ erro: "ID do Telegram invalido" });
       return;
     }
-    if (!PLANOS[plano]) {
+    if (!Object.hasOwn(PLANOS, plano)) {
       res.status(400).json({ erro: "Plano invalido" });
+      return;
+    }
+
+    if (typeof vitalicio !== "boolean" || (!vitalicio &&
+        (!Number.isFinite(Number(dias)) || Number(dias) <= 0 || Number(dias) > 36500))) {
+      res.status(400).json({ erro: "Duracao do VIP invalida" });
       return;
     }
 
@@ -296,7 +332,7 @@ export async function iniciarPainel(waguri) {
   });
 
   app.delete("/api/admin/conta/:email", exigirAuth(["dono"]), (req, res) => {
-    const alvo = decodeURIComponent(req.params.email);
+    const alvo = req.params.email;
     if (alvo === req.usuario.email) {
       res.status(400).json({ erro: "Voce nao pode excluir a propria conta" });
       return;
@@ -402,7 +438,17 @@ export async function iniciarPainel(waguri) {
       grupo: grupo ?? null,
       total: contarMembrosVistos(req.params.id),
       membros: membrosDoGrupo(req.params.id, 60),
+      automacao: obterAutomacao(req.params.id),
     });
+  });
+
+  app.put("/api/admin/grupo/:id/automacao", exigirAuth(["dono"]), (req, res) => {
+    const config = validarAutomacao(req.body);
+    if (!/^-\d+$/.test(req.params.id) || !config) {
+      return res.status(400).json({erro: "Configuracao de grupo invalida"});
+    }
+    salvarAutomacao(req.params.id, config);
+    res.json({ok: true, automacao: obterAutomacao(req.params.id)});
   });
 
   app.get("/api/admin/logs", exigirAuth(["dono"]), (req, res) => {
@@ -558,6 +604,16 @@ export async function iniciarPainel(waguri) {
 
   app.get("/api/admin/link-adicionar", exigirAuth(["dono"]), (_req, res) => {
     res.json({ link: linkParaAdicionar() });
+  });
+
+  app.use("/api", (_req, res) => {
+    res.status(404).json({ erro: "Rota nao encontrada" });
+  });
+
+  app.use((err, _req, res, _next) => {
+    const status = err.status >= 400 && err.status < 500 ? err.status : 500;
+    if (status === 500) logAviso(`Erro no painel: ${err.message}`);
+    res.status(status).json({ erro: status === 500 ? "Erro interno do servidor" : "Requisicao invalida" });
   });
 
   app.get("*", (_req, res) => {

@@ -1,0 +1,15 @@
+node_modules
+.git
+.env
+config.json
+database
+*.db
+*.db-wal
+*.db-shm
+*.log
+test
+
+backups
+*.antes-*.db
+runtime.lock
+*.restaurando

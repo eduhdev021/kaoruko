@@ -32,6 +32,7 @@ function gerarHash(senha, salt = crypto.randomBytes(16).toString("hex")) {
 }
 
 function conferirSenha(senha, hashGuardado, salt) {
+  if (!senhaValida(senha)) return false;
   const teste = crypto.pbkdf2Sync(senha, salt, ITERACOES, TAM_CHAVE, DIGEST);
   const guardado = Buffer.from(hashGuardado, "hex");
   if (teste.length !== guardado.length) return false;
@@ -60,7 +61,7 @@ export function criarConta({
   email,
   senha,
   nome = "",
-  papel = null,
+  papel = "membro",
   telegramId = null,
 }) {
   const mail = normalizarEmail(email);
@@ -73,8 +74,10 @@ export function criarConta({
 
   const { hash, salt } = gerarHash(senha);
   const agora = Date.now();
-  const primeira = totalContas() === 0;
-  const papelFinal = papel ?? (primeira ? "dono" : "membro");
+  if (!["dono", "membro"].includes(papel)) {
+    return { ok: false, motivo: "Papel invalido" };
+  }
+  const papelFinal = papel;
 
   const info = db
     .prepare(
@@ -288,7 +291,11 @@ export function lerToken(req) {
     .map((c) => c.trim())
     .find((c) => c.startsWith("kw_token="));
 
-  return cookie ? decodeURIComponent(cookie.slice(9)) : "";
+  try {
+    return cookie ? decodeURIComponent(cookie.slice(9)) : "";
+  } catch {
+    return "";
+  }
 }
 
 export function exigirAuth(papeis = null) {

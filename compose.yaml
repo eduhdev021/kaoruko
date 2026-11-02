@@ -1,0 +1,13 @@
+services:
+  kaoruko:
+    build: .
+    restart: unless-stopped
+    init: true
+    env_file: .env
+    ports:
+      - "127.0.0.1:4091:4091"
+    volumes:
+      - kaoruko_database:/app/database
+    stop_grace_period: 30s
+volumes:
+  kaoruko_database:

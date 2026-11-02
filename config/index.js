@@ -98,12 +98,12 @@ export const botConfig = {
     if (!botConfig.token || botConfig.token.includes('COLE_')) {
       problemas.push('BOT_TOKEN nao configurado. Pegue com o @BotFather e coloque no .env.');
     }
-    if (!botConfig.okarun.apikey || botConfig.okarun.apikey.startsWith('SUA_')) {
+    if (!botConfig.okarun.apikey || /^(SUA_|COLE_)/.test(botConfig.okarun.apikey)) {
       problemas.push(
         'OKARUN_APIKEY nao configurada. Pegue em https://api.okarunsystem.com.br e coloque no .env.'
       );
     }
-    if (botConfig.owners.length === 0) {
+    if (botConfig.owners.length === 0 || botConfig.owners.some(id => !/^\d+$/.test(id))) {
       problemas.push('BOT_OWNERS vazio. Comandos de dono ficarao inacessiveis.');
     }
     return problemas;

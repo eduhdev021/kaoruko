@@ -1,0 +1,38 @@
+export const description = 'Mostra as novidades e exemplos da versao 5.0';
+export const uso = '/novidades';
+export default async function novidades(ctx) {
+  return ctx.responderComApagar([
+    '<b>KAORUKO 5.0 · PLATAFORMA TELEGRAM</b>', '',
+    '/miniapp · /comprar · /paysupport · /termos',
+    '/topico · /canal · /convite · /entrada',
+    '/album · /figurinha · /quiz · /local · /contato',
+    '/compartilhar · /reagir · /fixar · /desafixar',
+    'Mini App, Stars e Business dependem de ativacao/configuracao externa.',
+    '',
+    '/captcha · /antiraid · /antispam · /dominios',
+    '/avisosconfig · /historico · /desfazer',
+    '/agendar · /reputacao · /atalho',
+    'Painel completo: /gestao.html no endereco da bot',
+    '',
+    '/notas — base de conhecimento do grupo',
+    '/filtro — respostas por frase exata',
+    '/antiflood — controle de excesso de mensagens',
+    '/bloqueios — controle de tipos de conteudo',
+    '/palavras — termos bloqueados',
+    '/silenciar 10m e /dessilenciar — por resposta',
+    '/denunciar — solicita revisao aos admins',
+    '/ranking — atividade com coleta opcional',
+    '',
+    '⏰ /lembrete 10m beber agua — lembretes persistentes',
+    '🔎 /buscarcmd musica — busca de comandos',
+    '📋 /regras — regras do grupo',
+    '📊 /enquete Pizza? | Sim | Nao — votacao anonima', '',
+    '<b>Para administradores</b>',
+    '/boasvindas Ola, {nome}! Bem-vindo ao {grupo}.',
+    '/regras definir Respeite os membros.',
+    '/antilink on — remove links de membros',
+    '/advertir — responda a mensagem de um membro',
+    '/advertir ver ou /advertir limpar — tambem por resposta', '',
+    'Antilink exige permissao para apagar mensagens. As advertencias nao expulsam membros automaticamente.',
+  ].join('\n'));
+}

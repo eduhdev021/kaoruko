@@ -63,6 +63,8 @@ export function analisar(comando) {
   const limpo = String(comando ?? "").trim();
 
   if (!limpo) return { ok: false, motivo: "Comando vazio" };
+  // A blacklist antiga nao era uma barreira de seguranca: aceita somente atalhos fixos.
+  if (!Object.values(ATALHOS).includes(limpo)) return {ok:false,motivo:"Console restrito aos atalhos de diagnostico. Shell arbitrario desativado."};
   if (limpo.length > 500) return { ok: false, motivo: "Comando longo demais" };
 
   for (const { re, motivo } of PERIGOSOS) {

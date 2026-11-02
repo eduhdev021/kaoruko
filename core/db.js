@@ -1,7 +1,7 @@
 import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
-import Database from "@boruto_vk7/better-sqlite3";
+import Database from "better-sqlite3";
 import { logSucesso, logErro } from "../utils/logger.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 const PASTA = path.join(__dirname, "..", "database");
 if (!fs.existsSync(PASTA)) fs.mkdirSync(PASTA, { recursive: true });
 
-const ARQUIVO = path.join(PASTA, "kaoruko.db");
+export const ARQUIVO = process.env.DATABASE_PATH || path.join(PASTA, "kaoruko.db");
 
 export const db = new Database(ARQUIVO);
 

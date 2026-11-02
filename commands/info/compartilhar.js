@@ -1,0 +1,2 @@
+export const description='Mostra botoes opcionais de contato/localizacao no privado';export const soPrivado=true;
+export default ctx=>ctx.ctx.reply('Compartilhe apenas se desejar. Nao armazenamos seu contato nem coordenadas nestes modulos.',{reply_markup:{keyboard:[[{text:'Compartilhar meu contato',request_contact:true},{text:'Compartilhar localizacao',request_location:true}],[{text:'Fechar teclado'}]],resize_keyboard:true,one_time_keyboard:true}});

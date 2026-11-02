@@ -1,3 +1,4 @@
+import { responderCaptcha } from '../core/entrada.js';
 import { download, OkarunError } from "../core/api.js";
 import { recuperar } from "../core/cache.js";
 import { cortar, escapeHtml, tamanhoLegivel } from "../utils/helpers.js";
@@ -54,7 +55,7 @@ async function tratarPlay(ctx, partes) {
       await ctx.telegram.sendMessage(
         chatId,
         `<b>Arquivo grande demais</b>\n\nEsse tem ${tamanhoLegivel(resultado.tamanho)} ` +
-          `e o Telegram so aceita 50MB.\n\n<a href="${arquivo}">Baixar pelo navegador</a>`,
+          `e o Telegram so aceita 50MB.\n\n<a href="${escapeHtml(arquivo)}">Baixar pelo navegador</a>`,
         { parse_mode: "HTML" },
       );
       return;
@@ -108,6 +109,7 @@ export function criarHandlerCallback(_waguri) {
     const partes = query.data.split(":");
     const acao = partes[0];
     try {
+      if (await responderCaptcha(ctx)) return;
       if (acao === "del") {
         const donoId = partes[1];
         const clicouId = String(ctx.from?.id ?? "");

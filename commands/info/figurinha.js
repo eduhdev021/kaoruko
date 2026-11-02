@@ -1,0 +1,2 @@
+export const description='Reenvia uma figurinha respondida pelo seu file_id';export const aliases=['sticker'];
+export default async ctx=>{const sticker=ctx.respondida?.sticker;if(!sticker)return ctx.erro('Responda a uma figurinha com /figurinha. Este comando nao converte fotos.');return ctx.waguri.telegram.callApi('sendSticker',{chat_id:ctx.chatId,sticker:sticker.file_id,...(ctx.msg.message_thread_id?{message_thread_id:ctx.msg.message_thread_id}:{})});};

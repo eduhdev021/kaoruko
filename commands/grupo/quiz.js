@@ -1,0 +1,2 @@
+export const description='Cria quiz nativo; a primeira opcao e a correta';export const soGrupo=true;
+export default ctx=>{const [pergunta,...opcoes]=ctx.q.split('|').map(s=>s.trim());if(!pergunta||pergunta.length>300||opcoes.length<2||opcoes.length>10||opcoes.some(x=>!x||x.length>100))return ctx.erro('/quiz PERGUNTA | RESPOSTA CORRETA | OUTRA OPCAO (2–10 opcoes).');return ctx.waguri.telegram.callApi('sendPoll',{chat_id:ctx.chatId,question:pergunta,options:opcoes.map(text=>({text})),type:'quiz',correct_option_id:0,is_anonymous:true});};
